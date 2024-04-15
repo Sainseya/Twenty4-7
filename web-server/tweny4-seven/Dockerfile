@@ -1,11 +1,11 @@
 ## Fichier : ./react-docker/Dockerfile
-FROM node:18.10.0-alpine3.15
+FROM node:21.7.3-alpine3.18
 
-WORKDIR /usr/src/app/react-docker
+WORKDIR /twenty4-seven
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install
 
 EXPOSE 3000
 

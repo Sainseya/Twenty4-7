@@ -1,0 +1,31 @@
+version: '3'
+services:
+  web-server:
+    container_name: web-server
+    build:
+      context: ./web-server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+       - ./twenty4-seven:./web-server
+       - ./web-server/node_modules
+    depends_on:
+      - postgresql
+
+  postgresql:
+      build:
+        context: ./database
+        dockerfile: Dockerfile
+      container_name: postgresql
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: admin
+        POSTGRES_DB: twenty4-seven-db
+      volumes:
+        - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  postgresql_data:
