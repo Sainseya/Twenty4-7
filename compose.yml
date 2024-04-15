@@ -4,7 +4,6 @@ services:
     container_name: web-server
     build:
       context: ./web-server
-      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
@@ -16,7 +15,6 @@ services:
   postgresql:
       build:
         context: ./database
-        dockerfile: Dockerfile
       container_name: postgresql
       ports:
         - "5432:5432"
