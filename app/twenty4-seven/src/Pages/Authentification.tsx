@@ -83,8 +83,8 @@ const Authentification: React.FC = () => {
                       <div className="text-center">
                         <p className="text-base text-gray-600">
                           Already have an account?{" "}
-                          <a
-                            href=""
+                          <button
+                            type="button"
                             onClick={(e) => {
                               e.preventDefault();
                               togglePanel();
@@ -92,7 +92,7 @@ const Authentification: React.FC = () => {
                             className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline"
                           >
                             Login here
-                          </a>
+                          </button>
                         </p>
                       </div>
                     </div>
@@ -144,8 +144,8 @@ const Authentification: React.FC = () => {
                       <div className="text-center">
                         <p className="text-base text-gray-600">
                           Don’t have an account?{" "}
-                          <a
-                            href="#"
+                          <button
+                            type="button"
                             onClick={(e) => {
                               e.preventDefault();
                               togglePanel();
@@ -153,7 +153,7 @@ const Authentification: React.FC = () => {
                             className="font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 hover:underline"
                           >
                             Create a free account
-                          </a>
+                          </button>
                         </p>
                       </div>
                     </div>

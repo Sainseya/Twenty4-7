@@ -30,13 +30,13 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           {label}
         </label>
         {showForgotPassword && (
-          <a
-            href=""
+          <button
+            type="button"
             title="Forgot password?"
             className="text-sm font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus:text-orange-600 hover:underline"
           >
             Forgot password ?
-          </a>
+          </button>
         )}
       </div>
       <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">

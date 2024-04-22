@@ -7,7 +7,7 @@ interface TextInputProps {
     icon?: ReactNode; //* Optionnel: permet de spécifier une icône pour le champ de texte
   }
 
-const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon: icon }) => {
+const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon }) => {
     return (
       <div>
         <label htmlFor="" className="text-base font-medium text-gray-900">
