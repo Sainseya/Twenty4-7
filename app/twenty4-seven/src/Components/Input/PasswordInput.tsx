@@ -56,6 +56,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         <div
           className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
           onClick={togglePasswordVisibility}
+          data-testid="eye-icon"
         >
           {showPassword ? <HiEye /> : <HiEyeOff />}
         </div>
