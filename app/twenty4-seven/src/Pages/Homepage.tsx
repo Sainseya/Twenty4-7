@@ -8,7 +8,7 @@ const Homepage: React.FC = () => {
     <div>
       <Topbar nameWebsite="Twenty4/7"/>
       <NewBanner newsText="New Mineblock NFT Collection"/>
-      <CategoriesCarousel />
+      <CategoriesCarousel categoryName={["NFT", "Water", "Courses", "Soon"]} />
       <h1>Home Page</h1>
     </div>
   );
