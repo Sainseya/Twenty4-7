@@ -1,52 +1,33 @@
-# # Utilisation de l'image officielle de PostgreSQL
-# FROM postgres:latest
-
-# # Définition des variables d'environnement pour définir l'utilisateur, le mot de passe et le nom de la base de données
-# ENV POSTGRES_USER admin
-# ENV POSTGRES_PASSWORD admin
-# ENV POSTGRES_DB twenty4-seven-db
-
-# # Optionnel : vous pouvez personnaliser la configuration de PostgreSQL en ajoutant des fichiers de configuration
-# # COPY postgresql.conf /etc/postgresql/postgresql.conf
-
-# EXPOSE 5432
-
-# CMD ["postgres"]
-
-# FROM node:21.7.3-alpine3.18
-
-# WORKDIR /tweny4-seven
-
-# COPY package*.json ./
-
-# RUN yarn
-
-# EXPOSE 3000
-
-# CMD ["npm", "start"]
-
-
-############################################################
-
-
-# Use an official PHP base image
 FROM php:latest
 
-# Install PHP extensions and dependencies
-RUN apt update \
-    && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
-    && docker-php-ext-install intl opcache pdo pdo_mysql \
-    && pecl install apcu \
-    && docker-php-ext-enable apcu \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-install zip
+RUN apt-get update \
+    &&  apt-get install -y --no-install-recommends \
+        locales apt-utils git libicu-dev g++ libpng-dev libxml2-dev libzip-dev libonig-dev libxslt-dev unzip libpq-dev nodejs npm wget \
+        apt-transport-https lsb-release ca-certificates
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+RUN docker-php-ext-install pdo pdo_pgsql
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen  \
+    &&  echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen \
+    &&  locale-gen
 
-WORKDIR /var/www/symfony_docker
+RUN curl -sS https://getcomposer.org/installer | php -- \
+    &&  mv composer.phar /usr/local/bin/composer
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://get.symfony.com/cli/installer | bash\
+    &&  mv /root/.symfony5/bin/symfony /usr/local/bin
 
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-# RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-# RUN git config --global user.email "you@example.com" \ 
-#     && git config --global user.name "Your Name"
+RUN docker-php-ext-configure \
+            intl \
+    &&  docker-php-ext-install \
+            pdo pdo_mysql pdo_pgsql opcache intl zip calendar dom mbstring gd xsl
 
+RUN pecl install apcu && docker-php-ext-enable apcu
+
+RUN npm install --global yarn
+
+RUN git config --global user.email "" \
+    &&  git config --global user.name ""
+
+CMD tail -f /dev/null
+
+WORKDIR /var/www/html/
