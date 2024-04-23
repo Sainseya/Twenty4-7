@@ -11,7 +11,7 @@ module.exports = {
         light_bg2: '#f9fafb',
         light_txtZone: '#f3f4f6',
         light_card: '#f3f4f6',
-        light_cardBoder: '#e5e7eb',
+        light_border: '#e5e7eb',
         light_badge: '#eeddfd',
         light_badge2: '#17ef97',
         //? Dark Color
@@ -19,7 +19,7 @@ module.exports = {
         dark_bg2: '#222528',
         dark_txtZone: '#383241',
         dark_card: '#0c1014',
-        dark_cardBorder: '#363c44',
+        dark_border: '#363c44',
         dark_badge: '#422f59',
         dark_txtBadge: '#bb76ff',
         dark_badge2: '#2b4e33',
