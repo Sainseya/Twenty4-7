@@ -30,6 +30,8 @@ module.exports = {
         txtBlack: '#000000',
         txtWhite: '#ffffff',
         txtPlaceholder: '#939aa6',
+        txtGreen: '#17ef97',
+        txtPurple: '#9a50e3',
 
       }
     },
