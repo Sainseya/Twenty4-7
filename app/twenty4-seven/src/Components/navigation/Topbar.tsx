@@ -27,14 +27,14 @@ const Topbar: React.FC<TopbarProps> = ({ nameWebsite }) => {
         </div>
       </div>
       <div className="flex w-64 justify-around">
-        <button type="button" className="">
+        <button type="button" data-testid="theme-icon">
           <IoIosSunny size={32} />
         </button>
-        <button type="button" className="">
+        <button type="button" data-testid="cart-icon">
           <FaCartShopping size={32} />
         </button>
         <Link to="/connexion">{/* //! Tempo */}
-          <button type="button" className="">
+          <button type="button" data-testid="user-icon">
             <FaUser size={32} />
           </button>
         </Link>
