@@ -25,8 +25,13 @@ RUN pecl install apcu && docker-php-ext-enable apcu
 
 RUN npm install --global yarn
 
-RUN git config --global user.email "" \
-    &&  git config --global user.name ""
+# Définition des variables d'environnement
+ENV GIT_USER_NAME "nseya"
+ENV GIT_USER_EMAIL "sainseya0x0@gmail.com"
+
+# Configuration de git avec les variables d'environnement
+RUN git config --global user.name "$GIT_USER_NAME" \
+    && git config --global user.email "$GIT_USER_EMAIL"
 
 CMD tail -f /dev/null
 

@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: twenty4-seven-db
     volumes:
-      - postgresql_data:/var/lib/postgresql/data
+      - postgresql_twenty4-seven:/var/lib/postgresql/data
     networks:
       - app-network
     restart: unless-stopped
@@ -42,8 +42,9 @@ services:
     restart: unless-stopped
 
 volumes:
-  postgresql_data:
+  postgresql_twenty4-seven:
 
 networks:
   app-network:
+    name: twenty4-seven
     driver: bridge
