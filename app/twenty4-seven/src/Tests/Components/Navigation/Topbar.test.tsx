@@ -32,7 +32,7 @@ describe("Topbar component", () => {
       </Router>
     );
 
-    expect(screen.getByTestId("weather-icon")).toBeInTheDocument();
+    expect(screen.getByTestId("theme-icon")).toBeInTheDocument();
     expect(screen.getByTestId("cart-icon")).toBeInTheDocument();
     expect(screen.getByTestId("user-icon")).toBeInTheDocument();
   });

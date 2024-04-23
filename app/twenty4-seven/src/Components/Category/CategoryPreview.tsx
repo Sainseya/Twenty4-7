@@ -11,12 +11,12 @@ const CategoryPreview: React.FC<CategoriesPreviewProps> = ({
     <div className="flex my-8">
       <div className="flex flex-col flex-grow">
         <div className="font-semibold text-2xl">
-          <span className="border-b-4 border-txtGreen rounded-b">
+          <span data-testid="categoryName" className="border-b-4 border-txtGreen rounded-b">
             {categoryName} :
           </span>
         </div>
         <br />
-        <div id="text" className="text-lg">
+        <div data-testid="textCategory" className="text-lg">
           {textCategory}
         </div>
       </div>
