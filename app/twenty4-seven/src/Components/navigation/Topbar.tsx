@@ -9,11 +9,11 @@ interface TopbarProps {
 
 const Topbar: React.FC<TopbarProps> = ({ nameWebsite }) => {
   return (
-    <div className="flex w-full h-16 bg-light_bg justify-between items-center">
+    <div id="topbar" className="flex w-full h-16 bg-light_bg justify-between items-center">
       <div className="w-64 px-8">
         <h2 className="font-semibold">{nameWebsite}</h2>
       </div>
-      <div className="flex flex-1 px-2 justify-center items-center">
+      <div className="flex flex-1 px-32 justify-center items-center">
         <div
           id="Search"
           className="w-full h-11 bg-light_txtZone rounded-xl flex items-center pl-4"
