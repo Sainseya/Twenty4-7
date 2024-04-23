@@ -6,7 +6,7 @@ import NewBanner from "../Components/navigation/NewBanner";
 import Topbar from "../Components/navigation/Topbar";
 
 const Homepage: React.FC = () => {
-  const categories = ["NFT", "Water", "Courses", "Soon"];
+  const categories = ["NFT", "Water", "Courses", "Soon",];
 
   return (
     <div>
@@ -17,12 +17,16 @@ const Homepage: React.FC = () => {
         <div id="seperator" className="absolute left-44 right-44 h-2 bg-light_border rounded-xl -top-1"></div>
         {categories.map((category, index) => (
           <React.Fragment key={index}>
+            {category.toLowerCase() !== "soon" && (
+            <>
             {index % 2 === 0 ? (
               <CategoryPreview categoryName={category} textCategory="fgfunhfouignhfu unifdghnfuihgfdigu nhgfd nuh" />
             ) : (
               <CategoryPreviewReverse categoryName={category} textCategory="fgfunhfouignhfu unifdghnfuihgfdigu nhgfd nuh" />
             )}
             {index !== category.length - 1 && <div className="h-2 bg-light_border rounded-xl"></div>}
+            </>
+            )}
           </React.Fragment>
         ))}
       </div>
