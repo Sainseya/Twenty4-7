@@ -14,13 +14,9 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
   return (
     <div className="flex w-full h-80 px-44 bg-light_txtZone items-center justify-between">
       <div className="flex h-72 w-80 mr-2 bg-light_bg2 rounded-xl border-2 border-light_border items-center justify-center">
-        <p className="text-center font-semibold text-2xl">Sale categories</p>
+        <p className="text-center font-semibold text-2xl">Sales categories</p>
       </div>
       {categoriesComponents}
-      {/* <Categories categorieName="NFT" />
-      <Categories categorieName="Water" />
-      <Categories categorieName="Courses" />
-      <Categories categorieName="Soon" /> */}
     </div>
   );
 };
