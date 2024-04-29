@@ -28,7 +28,7 @@ const Topbar: React.FC = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="px-4 py-2 w-full bg-transparent focus:outline-none focus:ring-0 border-none"
+            className="px-4 py-2 w-full bg-transparent focus:outline-none focus:ring-0 border-none text-txtBlack dark:text-txtWhite"
           />
         </div>
       </div>
