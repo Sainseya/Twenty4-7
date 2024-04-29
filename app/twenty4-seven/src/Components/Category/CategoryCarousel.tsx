@@ -12,9 +12,9 @@ const CategoryCarousel: React.FC<CategoriesCarouselProps> = ({
     <Category key={index} categoryName={categoryName} />
   ));
   return (
-    <div className="flex w-full h-80 px-44 bg-light_txtZone items-center justify-between">
-      <div className="flex h-72 w-80 mr-2 bg-light_bg2 rounded-xl border-2 border-light_border items-center justify-center">
-        <p className="text-center font-semibold text-2xl">Sales categories</p>
+    <div className="flex w-full h-80 px-44 bg-light_txtZone dark:bg-dark_bg2 items-center justify-between">
+      <div className="flex h-72 w-80 mr-2 bg-light_bg2 dark:bg-txtPlaceholder rounded-xl border-2 border-light_border dark:border-dark_border items-center justify-center">
+        <p className="text-center font-semibold text-2xl text-txtBlack dark:text-txtWhite">Sales categories</p>
       </div>
       {categoryComponents}
     </div>

@@ -3,6 +3,7 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx,tsx,ts}", 
             'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       colors: {
