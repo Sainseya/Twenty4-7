@@ -11,7 +11,7 @@ const Homepage: React.FC = () => {
   return (
     <div>
       <Topbar />
-      <NewBanner newsText="New Mineblock NFT Collection" />
+      <NewBanner newsText="New Mineblock NFT Collection" linkToNewArrivages="nft" />
       <CategoryCarousel categoryName={categories} />
       <div className="relative flex flex-col w-full px-44 bg-light_bg dark:bg-dark_bg pt-1">
         <div id="seperator" className="absolute left-44 right-44 h-2 bg-light_border dark:bg-dark_border rounded-xl -top-1"></div>

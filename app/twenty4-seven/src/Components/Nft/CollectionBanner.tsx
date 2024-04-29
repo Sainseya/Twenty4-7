@@ -16,6 +16,7 @@ const CollectionBanner: React.FC<CollectionBannerProps> = ({ collectionName, tot
           src={BackgroundCollection}
           alt="backgroundCollec"
           className="h-full w-full object-cover"
+          loading="lazy"
         />
         {/* Gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-black via-[#F1F1F1] dark:via-[#1F1F1F] via-40% to-transparent z-10"></div>

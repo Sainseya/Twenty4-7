@@ -1,8 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 interface NewBannerProps {
   newsText: string;
+  linkToNewArrivages: string;
 }
 
-const NewBanner: React.FC<NewBannerProps> = ({ newsText }) => {
+const NewBanner: React.FC<NewBannerProps> = ({ newsText, linkToNewArrivages }) => {
+  let navigate = useNavigate();
+
+  const navigateToNewProduct = () => {
+    navigate(`/${linkToNewArrivages}`);
+  }
+
   return (
     <div
       id="newsBanner"
@@ -10,12 +19,12 @@ const NewBanner: React.FC<NewBannerProps> = ({ newsText }) => {
     >
       <p className=" pl-8 text-center font-semibold text-txtBlack dark:text-txtWhite">
         🎉 New arrivages : {newsText}{" "}
-        <a
-          href="/"
+        <button type="button"
           className="text-blue-600 hover:text-blue-700 hover:underline"
+          onClick={navigateToNewProduct}
         >
           click here
-        </a>
+        </button>
       </p>
     </div>
   );
