@@ -4,11 +4,8 @@ import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-interface TopbarProps {
-  nameWebsite: string;
-}
 
-const Topbar: React.FC<TopbarProps> = ({ nameWebsite }) => {
+const Topbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const handleThemeToggle = () => {
@@ -20,7 +17,7 @@ const Topbar: React.FC<TopbarProps> = ({ nameWebsite }) => {
   return (
     <div id="topbar" className="flex w-full h-16 bg-light_bg dark:bg-dark_bg justify-between items-center">
       <div className="w-64 px-8">
-        <h2 className="font-semibold text-txtBlack dark:text-txtWhite">{nameWebsite}</h2>
+        <h2 className="font-semibold text-txtBlack dark:text-txtWhite">Twenty4/7</h2>
       </div>
       <div className="flex flex-1 px-32 justify-center items-center">
         <div

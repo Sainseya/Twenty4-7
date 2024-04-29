@@ -10,7 +10,7 @@ const Homepage: React.FC = () => {
 
   return (
     <div>
-      <Topbar nameWebsite="Twenty4/7" />
+      <Topbar />
       <NewBanner newsText="New Mineblock NFT Collection" />
       <CategoryCarousel categoryName={categories} />
       <div className="relative flex flex-col w-full px-44 bg-light_bg dark:bg-dark_bg pt-1">

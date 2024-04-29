@@ -3,21 +3,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Topbar from "../../../Components/navigation/Topbar";
 
 describe("Topbar component", () => {
-  test("renders correctly with provided props", () => {
-    const nameWebsite = "MyWebsite";
-    render(
-      <Router>
-        <Topbar nameWebsite={nameWebsite} />
-      </Router>
-    );
-
-    expect(screen.getByText(nameWebsite)).toBeInTheDocument();
-  });
-
   test('contains search input with placeholder "Search..."', () => {
     render(
       <Router>
-        <Topbar nameWebsite="MyWebsite" />
+        <Topbar />
       </Router>
     );
 
@@ -28,7 +17,7 @@ describe("Topbar component", () => {
   test("renders weather, cart, and user icons", () => {
     render(
       <Router>
-        <Topbar nameWebsite="MyWebsite" />
+        <Topbar />
       </Router>
     );
 
@@ -40,7 +29,7 @@ describe("Topbar component", () => {
   test('clicking on user icon navigates to "/connexion" page', () => {
     render(
       <Router>
-        <Topbar nameWebsite="MyWebsite" />
+        <Topbar />
       </Router>
     );
 
