@@ -43,9 +43,9 @@ CMD ["composer install"]
 
 RUN COMPOSER_ALLOW_SUPERUSER=1
 
-# RUN composer require symfony/orm-pack \
-    # && composer require doctrine \
-    # && composer require symfony/routing \
-    # && composer require maker --dev
+CMD ["composer require symfony/orm-pack"]
+CMD ["composer require doctrine"]
+CMD ["composer require symfony/routing"]
+CMD ["composer require maker --dev"]
 
 CMD tail /dev/null
