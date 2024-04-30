@@ -32,7 +32,7 @@ const Authentification: React.FC = () => {
                   <form action="">
                     <div className="space-y-5">
                       <TextInput
-                        label="Name"
+                        label="Firstname and lastname"
                         type="text"
                         placeholder="Enter your name"
                         icon={<FaRegUser />}

@@ -1,35 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-const NftNavBar: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+interface NftNavBarProps {
+  setActiveIndex: (index: number) => void;
+  activeIndex: number;
+}
 
-  const handleButtonClick = (index: number) => {
-    setActiveIndex(index);
-  };
-
+const NftNavBar: React.FC<NftNavBarProps> = ({ setActiveIndex, activeIndex }) => {
   return (
     <div className="h-16 w-full flex items-center gap-5">
-      <button type="button">
-        <RxHamburgerMenu
+      <div>
+        <RxHamburgerMenu  
           size={32}
           className="text-txtBlack dark:text-txtWhite"
         />
-      </button>
+      </div>
       <div className="relative flex h-full">
         <button
-          className={`flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen ${
-            activeIndex === 0
-          }`}
-          onClick={() => handleButtonClick(0)}
+          className={`flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen`}
+          onClick={() => setActiveIndex(0)}
         >
           Items
         </button>
         <button
-          className={`relative flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen ${
-            activeIndex === 1
-          }`}
-          onClick={() => handleButtonClick(1)}
+          className={`relative flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen`}
+          onClick={() => setActiveIndex(1)}
         >
           Market
           <div className="absolute top-3 right-0 px-1 rounded text-xs bg-light_badge dark:bg-dark_badge text-black dark:text-txtPurple">
@@ -37,10 +32,8 @@ const NftNavBar: React.FC = () => {
           </div>
         </button>
         <button
-          className={`flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen ${
-            activeIndex === 2
-          }`}
-          onClick={() => handleButtonClick(2)}
+          className={`flex items-center justify-center w-28 text-txtBlack dark:text-txtWhite hover:text-txtGreen`}
+          onClick={() => setActiveIndex(2)}
         >
           News
         </button>
