@@ -19,14 +19,16 @@ const NFTpage: React.FC = () => {
         totalValue={146}
         maxValue={4.5}
       />
-      <div className="relative flex w-full px-44 bg-light_bg dark:bg-dark_bg border-b-2 border-light_border dark:border-dark_border">
+      <div className="flex w-full px-44 bg-light_bg dark:bg-dark_bg border-b-2 border-light_border dark:border-dark_border z-40 sticky top-16">
         <NftNavBar activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </div>
       {activeIndex === 0 && (
         // Contenu pour Items
-        <div className="flex-1 flex flex-row w-full px-44">
-          <SearchProductPanel />
-          <div className="flex-1 h-fit">
+        <div className="flex flex-row">
+          <div className="flex flex-row max-h-[9999px] w-fit pl-44">
+            <SearchProductPanel />
+          </div>
+          <div className="w-full h-fit pr-44">
             <div className="mt-4 grid grid-cols-4 gap-y-10 p-4 items-center justify-items-center">
               {Array.from({ length: nbrOfNft }).map((_, index) => (
                 <NftCard key={index} price={3.2} idCard={index} />
@@ -51,6 +53,12 @@ const NFTpage: React.FC = () => {
           </div>
         </div>
       )}
+      <div
+        id="footer"
+        className="h-52 w-full bg-light_bg2 dark:bg-dark_bg2 border-t-2 border-light_border dark:border-dark_border"
+      >
+        Hello
+      </div>
     </div>
   );
 };
