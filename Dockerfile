@@ -23,7 +23,7 @@ RUN docker-php-ext-configure \
     &&  docker-php-ext-install \
             pdo pdo_mysql pdo_pgsql opcache intl zip calendar dom mbstring gd xsl
 
-RUN pecl install apcu && docker-php-ext-enable apcu*
+RUN pecl install apcu && docker-php-ext-enable apcu
 
 # RUN composer require symfony/orm-pack \
 # && composer require doctrine/doctrine-migrations-bundle "^3.0"
