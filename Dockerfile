@@ -23,10 +23,7 @@ RUN docker-php-ext-configure \
     &&  docker-php-ext-install \
             pdo pdo_mysql pdo_pgsql opcache intl zip calendar dom mbstring gd xsl
 
-RUN pecl install apcu && docker-php-ext-enable apcu*
-
-# RUN composer require symfony/orm-pack \
-# && composer require doctrine/doctrine-migrations-bundle "^3.0"
+RUN pecl install apcu && docker-php-ext-enable apcu
 
 RUN npm install --global yarn
 
@@ -40,4 +37,12 @@ CMD ["php", "bin/console", "make:migration", "&&", "php", "bin/console", "doctri
 #     && git config --global user.email "$GIT_USER_EMAIL"
 
 CMD ["composer install"]
-CMD tail -f /dev/null
+
+RUN COMPOSER_ALLOW_SUPERUSER=1
+
+# RUN composer require symfony/orm-pack \
+    # && composer require doctrine \
+    # && composer require symfony/routing \
+    # && composer require maker --dev
+
+CMD tail /dev/null
