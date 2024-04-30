@@ -27,7 +27,7 @@ body * {
 /* La piste (le fond de la barre de défilement) */
 ::-webkit-scrollbar-track {
   background-color: #fff;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 html.dark ::-webkit-scrollbar-thumb {
