@@ -13,10 +13,12 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
   isDropdownOpen,
   closeDropdown,
 }) => {
+  let navigate = useNavigate();
+  
   const navigateToCart = () => {
     console.log("Go to shopping cart");
     closeDropdown();
-    //navigate("/shoppingcart");
+    navigate("/shoppingcart");
   };
 
   const deleteItemInCart = (index: number) => {
