@@ -32,7 +32,7 @@ const Topbar: React.FC = () => {
   return (
     <div
       id="topbar"
-      className="flex w-full h-16 bg-light_bg dark:bg-dark_bg justify-between items-center"
+      className="flex w-full h-16 border-b-2 border-light_border dark:border-dark_border bg-light_bg dark:bg-dark_bg justify-between items-center z-50 sticky top-0"
     >
       <div className="w-64 px-8">
         <button

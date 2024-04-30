@@ -11,7 +11,7 @@ interface CollectionBannerProps {
 
 const CollectionBanner: React.FC<CollectionBannerProps> = ({ collectionName, totalItems, totalValue, maxValue }) => {
     return(
-        <div className="relative w-full h-60 bg-light_txtZone border-y-2 border-light_border dark:border-dark_border" style={{ pointerEvents: "none" }}>
+        <div className="relative w-full h-60 bg-light_txtZone border-b-2 border-light_border dark:border-dark_border" style={{ pointerEvents: "none" }}>
         <img
           src={BackgroundCollection}
           alt="backgroundCollec"
