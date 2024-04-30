@@ -41,11 +41,11 @@ CMD ["php", "bin/console", "make:migration", "&&", "php", "bin/console", "doctri
 
 CMD ["composer install"]
 
-RUN COMPOSER_ALLOW_SUPERUSER=1
+# RUN COMPOSER_ALLOW_SUPERUSER=1
 
 CMD ["composer require symfony/orm-pack"]
 CMD ["composer require doctrine"]
 CMD ["composer require symfony/routing"]
 CMD ["composer require maker --dev"]
 
-CMD tail /dev/null
+CMD tail -f /dev/null
