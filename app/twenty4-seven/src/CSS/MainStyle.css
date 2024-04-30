@@ -6,6 +6,14 @@ body * {
   @apply transition-colors ease-linear duration-300;
 }
 
+body {
+  background-color: #fff;
+}
+
+html.dark body {
+  background-color: #1a1c1f;
+}
+
 
 /* Barre de défilement verticale */
 ::-webkit-scrollbar {
