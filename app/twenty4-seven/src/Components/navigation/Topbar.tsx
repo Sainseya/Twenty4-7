@@ -4,10 +4,15 @@ import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import CartDropdown from "../Cart/CartDropdown";
+import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
+import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
 
 const Topbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isDarkMode = document.documentElement.classList.contains("dark");
+
+  const LogoComponent = isDarkMode ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
 
@@ -34,13 +39,14 @@ const Topbar: React.FC = () => {
       id="topbar"
       className="flex w-full h-16 border-b-2 border-light_border dark:border-dark_border bg-light_bg dark:bg-dark_bg justify-between items-center z-50 sticky top-0"
     >
-      <div className="w-64 px-8">
+      <div className="w-64 px-8 pt-1">
         <button
           type="button"
-          className="font-semibold text-txtBlack dark:text-txtWhite"
+          className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
           onClick={navigateToHome}
         >
-          Twenty4/7
+          <LogoComponent style={{ width: '48px', height: '48px' }} />
+          <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">Twenty4/7</span>
         </button>
       </div>
       <div className="flex flex-1 px-32 justify-center items-center">
