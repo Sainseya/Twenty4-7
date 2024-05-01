@@ -5,6 +5,7 @@ import CollectionBanner from "../Components/Nft/CollectionBanner";
 import NftNavBar from "../Components/navigation/NftNavBar";
 import NftCard from "../Components/Nft/NftCard";
 import SearchProductPanel from "../Components/Search/SearchProductPanel";
+import Footer from "../Components/navigation/Footer";
 
 const NFTpage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -53,12 +54,7 @@ const NFTpage: React.FC = () => {
           </div>
         </div>
       )}
-      <div
-        id="footer"
-        className="h-52 w-full bg-light_bg2 dark:bg-dark_bg2 border-t-2 border-light_border dark:border-dark_border"
-      >
-        Hello
-      </div>
+      <Footer />
     </div>
   );
 };

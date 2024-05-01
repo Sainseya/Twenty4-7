@@ -15,7 +15,7 @@ const SearchProductPanel: React.FC = () => {
   return (
     
     <div className="flex flex-col w-80 pt-4 gap-4 bg-light_bg dark:bg-dark_bg2 border-x-2 border-light_border dark:border-dark_border">
-      <form action="" className="mb-2 px-4 z-30 sticky top-[132px]">
+      <form action="" className="mb-2 px-4 z-30 sticky top-[146px]">
         <div className="font-semibold mb-2 text-xl text-txtBlack dark:text-txtWhite">
           Search
         </div>
@@ -37,7 +37,7 @@ const SearchProductPanel: React.FC = () => {
           </button>
         </div>
       </form>
-      <form action="" className="sticky top-60">
+      <form action="" className="sticky top-64">
         <div className="mb-2 px-4">
           <div className="font-semibold mb-2 text-xl text-txtBlack dark:text-txtWhite">
             Price Range

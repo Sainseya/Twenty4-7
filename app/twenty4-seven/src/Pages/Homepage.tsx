@@ -4,6 +4,7 @@ import CategoryPreview from "../Components/Category/CategoryPreview";
 import CategoryPreviewReverse from "../Components/Category/CategoryPreviewReverse";
 import NewBanner from "../Components/navigation/NewBanner";
 import Topbar from "../Components/navigation/Topbar";
+import Footer from "../Components/navigation/Footer";
 
 const Homepage: React.FC = () => {
   const categories = ["NFT", "Water", "Courses", "Soon",];
@@ -24,12 +25,13 @@ const Homepage: React.FC = () => {
             ) : (
               <CategoryPreviewReverse categoryName={category} textCategory="fgfunhfouignhfu unifdghnfuihgfdigu nhgfd nuh" />
             )}
-            {index !== category.length - 1 && <div className="h-2 bg-light_border dark:bg-dark_border rounded-xl"></div>}
+            {index !== categories.length -2  && <div className="h-2 bg-light_border dark:bg-dark_border rounded-xl"></div>}
             </>
             )}
           </React.Fragment>
         ))}
       </div>
+      <Footer />
     </div>
   );
 };
