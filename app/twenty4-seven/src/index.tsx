@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './CSS/MainStyle.css';
 import Authentification from './Pages/Authentification';
 import Homepage from './Pages/Homepage';
+import NFTpage from './Pages/NFTpage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,8 +15,9 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<Homepage />}></Route>
         <Route path='/connexion' element={<Authentification />}></Route>
+        <Route path='/' element={<Homepage />}></Route>
+        <Route path='/nft' element={<NFTpage />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>
