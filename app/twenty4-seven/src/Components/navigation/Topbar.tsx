@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { IoIosSunny } from "react-icons/io";
+import { useState, useEffect } from "react";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +11,6 @@ const Topbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const isDarkMode = document.documentElement.classList.contains("dark");
-
   const LogoComponent = isDarkMode ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
@@ -21,19 +19,29 @@ const Topbar: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const navigateToUser = () => {
-    navigate("/connexion");
-  };
-
-  const navigateToHome = () => {
-    navigate("/");
+  const navigateTolink = (link: string) => {
+    navigate(link);
   };
 
   const handleThemeToggle = () => {
     setDarkMode(!darkMode);
+    localStorage.setItem("theme", !darkMode ? "dark" : "light");
+
     const html = document.documentElement;
     html.classList.toggle("dark");
   };
+
+  //? Load theme from local storage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   return (
     <div
@@ -44,7 +52,7 @@ const Topbar: React.FC = () => {
         <button
           type="button"
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
-          onClick={navigateToHome}
+          onClick={() => navigateTolink("/")}
         >
           <LogoComponent style={{ width: "48px", height: "48px" }} />
           <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
@@ -65,10 +73,10 @@ const Topbar: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex w-64 justify-around">
+      <div className="flex w-64 justify-around" data-testid="theme-icon">
         <DarkModeSwitch
           onChange={handleThemeToggle}
-          checked={!darkMode}
+          checked={darkMode}
           size={32}
           moonColor="white"
           sunColor="black"
@@ -90,7 +98,11 @@ const Topbar: React.FC = () => {
           />
         </button>
 
-        <button type="button" data-testid="user-icon" onClick={navigateToUser}>
+        <button
+          type="button"
+          data-testid="user-icon"
+          onClick={() => navigateTolink("/connexion")}
+        >
           <FaUser size={32} className="text-txtBlack dark:text-txtWhite" />
         </button>
       </div>
