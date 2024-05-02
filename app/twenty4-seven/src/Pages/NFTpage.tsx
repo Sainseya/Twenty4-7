@@ -12,7 +12,7 @@ const NFTpage: React.FC = () => {
   const nbrOfNft = 10;
 
   return (
-    <div className="flex flex-col bg-light_bg dark:bg-dark_bg">
+    <div className="flex flex-col min-h-screen bg-light_bg dark:bg-dark_bg">
       <Topbar />
       <CollectionBanner
         collectionName="MineBlock NFT"
@@ -30,7 +30,7 @@ const NFTpage: React.FC = () => {
             <SearchProductPanel />
           </div>
           <div className="w-full h-fit pr-44">
-            <div className="mt-4 grid grid-cols-4 gap-y-10 p-4 items-center justify-items-center">
+            <div className="my-5 grid grid-cols-4 gap-y-10 p-4 items-center justify-items-center">
               {Array.from({ length: nbrOfNft }).map((_, index) => (
                 <NftCard key={index} price={3.2} idCard={index} />
               ))}
@@ -40,16 +40,16 @@ const NFTpage: React.FC = () => {
       )}
       {activeIndex === 1 && (
         // Contenu pour Market
-        <div className="flex-1 flex flex-row w-full px-44">
-          <div className="flex w-full justify-center items-center font-semibold text-4xl text-txtBlack dark:text-txtWhite">
+        <div className="flex flex-col flex-grow w-full px-44">
+          <div className="flex flex-1 w-full justify-center items-center font-semibold text-4xl text-txtBlack dark:text-txtWhite">
             Market Coming Soon
           </div>
         </div>
       )}
       {activeIndex === 2 && (
         // Contenu pour News
-        <div className="flex-1 flex flex-row w-full px-44">
-          <div className="flex w-full justify-center items-center font-semibold text-4xl text-txtBlack dark:text-txtWhite">
+        <div className="flex flex-col flex-grow w-full px-44">
+          <div className="flex flex-1 w-full justify-center items-center font-semibold text-4xl text-txtBlack dark:text-txtWhite">
             News Coming Soon
           </div>
         </div>

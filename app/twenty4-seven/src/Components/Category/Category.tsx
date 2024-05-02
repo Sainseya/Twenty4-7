@@ -12,6 +12,7 @@ const Category: React.FC<CategoriesProps> = ({ categoryName }) => {
 
    const navigateToCategory = () => {
       navigate(`/${formatCategoryName}`);
+      window.scrollTo(0, 0);
    }
 
   return (
