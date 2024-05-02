@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import CategoryCarousel from "../../../Components/Category/CategoryCarousel";
 
 describe("CategoryCarousel component", () => {
   test("renders correctly with provided category names", () => {
     const categories = ["NFT", "Water", "Courses", "Soon"];
     render(
-      <Router>
+      <MemoryRouter>
         <CategoryCarousel categoryName={categories} />
-      </Router>
+      </MemoryRouter>
     );
 
     const salesCategoriesTitle = screen.getByText("Sales categories");
@@ -23,9 +23,9 @@ describe("CategoryCarousel component", () => {
   test("renders correct number of categories", () => {
     const categories = ["NFT", "Water", "Courses", "Soon"];
     render(
-      <Router>
+      <MemoryRouter>
         <CategoryCarousel categoryName={categories} />
-      </Router>
+      </MemoryRouter>
     );
 
     const categoryTitles = screen.getAllByRole("button", {

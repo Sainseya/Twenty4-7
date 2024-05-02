@@ -38,6 +38,7 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
+          data-testid="cart-dropdown"
         >
           {itemsInCart > 0 ? (
             // Afficher les éléments du panier ici
@@ -46,6 +47,7 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
                 type="button"
                 className="px-4 py-2 my-2 rounded-xl bg-purpleButton text-txtWhite text-sm font-semibold relative"
                 onClick={navigateToCart}
+                data-testid="go to cart"
               >
                 Go to cart
               </button>
@@ -54,6 +56,7 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
                 <div
                   key={index}
                   className="relative flex w-full h-16 items-center px-2"
+                  data-testid="item"
                 >
                   <div className="h-10 w-10 bg-slate-300 rounded-lg"></div>
                   <p className="flex flex-1 p-2 text-left text-txtBlack dark:text-txtWhite">
@@ -63,6 +66,7 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
                     type="button"
                     className="h-6 w-6 px-1 rounded-full text-sm  font-bold text-red-600 text-center text-[10px]"
                     onClick={() => deleteItemInCart(index)}
+                    data-testid="deleteBtn"
                   >
                     <FaRegTrashAlt size={20} />
                   </button>

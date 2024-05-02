@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import Category from "../../../Components/Category/Category";
 
 describe("Category component", () => {
   test("renders correctly with provided category name", () => {
     const categoryName = "NFT";
     render(
-      <Router>
+      <MemoryRouter>
         <Category categoryName={categoryName} />
-      </Router>
+      </MemoryRouter>
     );
 
     const categoryTitle = screen.getByText(categoryName);

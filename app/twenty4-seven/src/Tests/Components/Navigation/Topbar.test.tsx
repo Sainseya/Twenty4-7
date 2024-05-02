@@ -1,24 +1,42 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter, useNavigate } from "react-router";
 import Topbar from "../../../Components/navigation/Topbar";
+
+const mockedUsedNavigate = jest.fn();
+
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useNavigate: () => mockedUsedNavigate,
+}));
 
 describe("Topbar component", () => {
   test('contains search input with placeholder "Search..."', () => {
     render(
-      <Router>
+      <MemoryRouter>
         <Topbar />
-      </Router>
+      </MemoryRouter>
     );
 
     const searchInput = screen.getByPlaceholderText("Search...");
     expect(searchInput).toBeInTheDocument();
   });
 
+  test("renders brand name correctly", () => {
+    render(
+      <MemoryRouter>
+        <Topbar />
+      </MemoryRouter>
+    );
+
+    const brandName = screen.getByText('Twenty4/7');
+    expect(brandName).toBeInTheDocument();
+  });
+
   test("renders weather, cart, and user icons", () => {
     render(
-      <Router>
+      <MemoryRouter>
         <Topbar />
-      </Router>
+      </MemoryRouter>
     );
 
     expect(screen.getByTestId("theme-icon")).toBeInTheDocument();
@@ -26,18 +44,18 @@ describe("Topbar component", () => {
     expect(screen.getByTestId("user-icon")).toBeInTheDocument();
   });
 
-  test('clicking on user icon navigates to "/connexion" page', () => {
+  test('navigates to correct link when brand name is clicked', () => {
+    (useNavigate() as jest.Mock).mockReturnValue(mockedUsedNavigate);
+
     render(
-      <Router>
+      <MemoryRouter>
         <Topbar />
-      </Router>
+      </MemoryRouter>
     );
 
-    const userIcon = screen.getByTestId("user-icon");
-    fireEvent.click(userIcon);
+    const brandName = screen.getByText('Twenty4/7');
+    fireEvent.click(brandName);
 
-    setTimeout(() => {
-      expect(window.location.pathname).toBe("/connexion");
-    }, 500); // Attendre 500ms avant de vérifier l'URL
+    expect(mockedUsedNavigate).toHaveBeenCalledWith("/");
   });
 });

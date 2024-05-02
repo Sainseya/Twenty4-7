@@ -54,7 +54,7 @@ const Topbar: React.FC = () => {
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
           onClick={() => navigateTolink("/")}
         >
-          <LogoComponent style={{ width: "48px", height: "48px" }} />
+          <LogoComponent style={{ width: "48px", height: "48px" }} data-testid="logo"/>
           <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
             Twenty4/7
           </span>

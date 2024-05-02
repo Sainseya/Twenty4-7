@@ -46,6 +46,7 @@ const NftCard: React.FC<NftCardProps> = ({ price, idCard }) => {
             type="button"
             className="flex items-center justify-center h-8 w-8 bg-purpleButton rounded-lg p-1"
             onClick={addNftToCart}
+            data-testid="add to cart"
           >
             <FaCartShopping size={20} className="text-txtWhite" />
           </button>
