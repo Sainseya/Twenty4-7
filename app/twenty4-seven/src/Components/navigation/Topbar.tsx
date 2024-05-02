@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import CartDropdown from "../Cart/CartDropdown";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 
 const Topbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -45,8 +46,10 @@ const Topbar: React.FC = () => {
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
           onClick={navigateToHome}
         >
-          <LogoComponent style={{ width: '48px', height: '48px' }} />
-          <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">Twenty4/7</span>
+          <LogoComponent style={{ width: "48px", height: "48px" }} />
+          <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
+            Twenty4/7
+          </span>
         </button>
       </div>
       <div className="flex flex-1 px-32 justify-center items-center">
@@ -63,14 +66,13 @@ const Topbar: React.FC = () => {
         </div>
       </div>
       <div className="flex w-64 justify-around">
-        <button
-          type="button"
-          id="themeToggle"
-          onClick={handleThemeToggle}
-          data-testid="theme-icon"
-        >
-          <IoIosSunny size={32} className="text-txtBlack dark:text-txtWhite" />
-        </button>
+        <DarkModeSwitch
+          onChange={handleThemeToggle}
+          checked={!darkMode}
+          size={32}
+          moonColor="white"
+          sunColor="black"
+        />
         <button
           type="button"
           data-testid="cart-icon"
