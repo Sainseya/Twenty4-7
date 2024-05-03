@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,14 @@ const Topbar: React.FC = () => {
     toggleTheme();
     setDarkMode(!darkMode);
   };
+
+  useEffect(() => {
+    if (theme === "dark") {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, [theme]);
 
   return (
     <div
