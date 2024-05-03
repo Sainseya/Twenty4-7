@@ -2,8 +2,10 @@ import React from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
+import { isPageValid } from "../../Utils/ValidePages";
 
 const Footer: React.FC = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
@@ -11,8 +13,12 @@ const Footer: React.FC = () => {
 
   let navigate = useNavigate();
 
-  const goToLink = (link: string) => {
-    navigate(link);
+  const goToPage = (page: string) => {
+    if(isPageValid(page)) {
+      navigate(`/${page.toLowerCase()}`);
+    } else {
+      navigate("/404");
+    }
     window.scrollTo(0, 0);
   };
 
@@ -44,7 +50,7 @@ const Footer: React.FC = () => {
               <li>
                 <button
                   type="button"
-                  onClick={() => goToLink("/")}
+                  onClick={() => goToPage("")}
                   className="cursor-pointer"
                 >
                   Category
@@ -53,17 +59,17 @@ const Footer: React.FC = () => {
               <li>
                 <button
                   type="button"
-                  onClick={() => goToLink("/nft")}
+                  onClick={() => goToPage("nft")}
                   className="cursor-pointer"
                 >
                   NFT
                 </button>
               </li>
               <li>
-                <button type="button" className="cursor-default">Bathwater</button>
+                <button type="button" onClick={() => goToPage("bathwater")} className="cursor-pointer">Bathwater</button>
               </li>
               <li>
-                <button type="button" className="cursor-default">Courses</button>
+                <button type="button" onClick={() => goToPage("courses")} className="cursor-pointer">Courses</button>
               </li>
             </ul>
           </div>
@@ -101,7 +107,8 @@ const Footer: React.FC = () => {
               Social media
             </div>
             <div className="flex justify-start space-x-3">
-              <a
+              <motion.a
+                whileHover={{ y: -3.0 }}
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Facebook"
@@ -109,8 +116,9 @@ const Footer: React.FC = () => {
                 className="flex items-center p-1"
               >
                 <FaFacebook size={24} className="dark:text-txtWhite" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -3.0 }}
                 rel="noopener noreferrer"
                 target="_blank"
                 title="XTwitter"
@@ -118,8 +126,9 @@ const Footer: React.FC = () => {
                 className="flex items-center p-1"
               >
                 <FaXTwitter size={24} className="dark:text-txtWhite" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ y: -3.0 }}
                 rel="noopener noreferrer"
                 target="_blank"
                 title="Instagram"
@@ -127,7 +136,7 @@ const Footer: React.FC = () => {
                 className="flex items-center p-1"
               >
                 <FaInstagram size={24} className="dark:text-txtWhite" />
-              </a>
+              </motion.a>
             </div>
           </div>
         </div>

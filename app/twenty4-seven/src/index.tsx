@@ -6,6 +6,7 @@ import './CSS/MainStyle.css';
 import Authentification from './Pages/Authentification';
 import Homepage from './Pages/Homepage';
 import NFTpage from './Pages/NFTpage';
+import Page404 from './Pages/Page404';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +19,7 @@ root.render(
         <Route path='/connexion' element={<Authentification />}></Route>
         <Route path='/' element={<Homepage />}></Route>
         <Route path='/nft' element={<NFTpage />}></Route>
+        <Route path='/404' element={<Page404 />}></Route>
       </Routes>
     </Router>
   </React.StrictMode>

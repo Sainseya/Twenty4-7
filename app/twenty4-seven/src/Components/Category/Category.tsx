@@ -2,34 +2,25 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { extractDominantColor } from "../../Utils/colorExtractor";
+import { isPageValid } from "../../Utils/ValidePages";
 
 interface CategoriesProps {
   categoryName: string;
   imgPath?: string | null;
 }
 
-const Category: React.FC<CategoriesProps> = ({
-  categoryName,
-  imgPath = null,
-}) => {
-  const [buttonStyle, setButtonStyle] = useState({
-    backgroundColor: "#F9FAFB",
-  });
-  const formatCategoryName = categoryName.toLowerCase();
-  let navigate = useNavigate();
+const Category: React.FC<CategoriesProps> = ({ categoryName, imgPath = null }) => {
+  const [buttonStyle, setButtonStyle] = useState({ backgroundColor: "#F9FAFB" });
 
-  console.log("IMG path : " + imgPath);
-  
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (!imgPath) {
       return;
     }
 
-    // Extraire la couleur principale de l'image
     extractDominantColor(imgPath)
       .then((dominantColor) => {
-        // Convertir la couleur RVB en chaîne hexadécimale
         const colorHex = `#${(
           (1 << 24) +
           (dominantColor[0] << 16) +
@@ -38,20 +29,24 @@ const Category: React.FC<CategoriesProps> = ({
         )
           .toString(16)
           .slice(1)}`;
-        // Mettre à jour le style du bouton avec la couleur extraite
         setButtonStyle({ backgroundColor: colorHex });
       })
       .catch((error) => {
         console.error(
-          "Erreur lors de l'extraction de la couleur principale :",
+          "Error when extracting the main color :",
           error
         );
       });
   }, [imgPath]);
 
-  const navigateToCategory = () => {
-    navigate(`/${formatCategoryName}`);
-    window.scrollTo(0, 0);
+  const navigateToCategory = (categoryName: string) => {
+    if (isPageValid(categoryName)) {
+      navigate(`/${categoryName.toLowerCase()}`);
+      window.scrollTo(0, 0);
+    } else {
+      // Redirects to 404 page if category is invalid
+      navigate("/404");
+    }
   };
 
   return (
@@ -60,7 +55,7 @@ const Category: React.FC<CategoriesProps> = ({
       whileTap={{ rotate: 5 }}
       style={buttonStyle}
       className="flex relative h-72 min-w-28 flex-grow mx-2 rounded-xl border-2 border-light_border dark:border-dark_border items-center justify-center"
-      onClick={navigateToCategory}
+      onClick={() => navigateToCategory(categoryName)}
     >
       {imgPath ? (
         <img
@@ -70,9 +65,7 @@ const Category: React.FC<CategoriesProps> = ({
           className="object-cover size-64 rounded-xl"
         />
       ) : (
-        <p className="text-center font-semibold text-2xl">
-          {categoryName}
-        </p>
+        <p className="text-center font-semibold text-2xl">{categoryName}</p>
       )}
     </motion.button>
   );

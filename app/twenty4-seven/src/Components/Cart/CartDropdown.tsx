@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { isPageValid } from "../../Utils/ValidePages";
 
 interface CartDropdownProps {
   itemsInCart?: number;
@@ -15,10 +16,13 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
 }) => {
   let navigate = useNavigate();
   
-  const navigateToCart = () => {
-    console.log("Go to shopping cart");
+  const navigateToCart = (page: string) => {
     closeDropdown();
-    navigate("/shoppingcart");
+    if(isPageValid(page)) {
+      navigate(`/${page.toLowerCase()}`);
+    } else {
+      navigate("/404");
+    }
   };
 
   const deleteItemInCart = (index: number) => {
@@ -41,12 +45,11 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
           data-testid="cart-dropdown"
         >
           {itemsInCart > 0 ? (
-            // Afficher les éléments du panier ici
             <>
               <button
                 type="button"
                 className="px-4 py-2 my-2 rounded-xl bg-purpleButton text-txtWhite text-sm font-semibold relative"
-                onClick={navigateToCart}
+                onClick={() => navigateToCart("shoppingcart")}
                 data-testid="go to cart"
               >
                 Go to cart
