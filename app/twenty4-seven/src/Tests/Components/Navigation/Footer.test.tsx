@@ -1,6 +1,6 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter, useNavigate } from "react-router";
+import { MemoryRouter } from "react-router";
+import { ThemeProvider } from "../../../Utils/ThemeContext";
 import Footer from "../../../Components/navigation/Footer";
 
 const mockedUsedNavigate = jest.fn();
@@ -13,9 +13,11 @@ jest.mock("react-router", () => ({
 describe("Footer", () => {
   test("renders product links correctly", () => {
     render(
-      <MemoryRouter>
-        <Footer />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const categoryLink = screen.getByText("Category");
@@ -27,9 +29,11 @@ describe("Footer", () => {
 
   test("renders company links correctly", () => {
     render(
-      <MemoryRouter>
-        <Footer />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const privacyLink = screen.getByText("Privacy");
@@ -41,9 +45,11 @@ describe("Footer", () => {
 
   test("renders developers links correctly", () => {
     render(
-      <MemoryRouter>
-        <Footer />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const projectLink = screen.getByText("Project");
@@ -58,9 +64,11 @@ describe("Footer", () => {
 
   test("navigates to correct link when Category button is clicked", () => {
     render(
-      <MemoryRouter>
-        <Footer />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const categoryButton = screen.getByText("Category");
@@ -71,9 +79,11 @@ describe("Footer", () => {
 
   test("navigates to correct link when NFT button is clicked", () => {
     render(
-      <MemoryRouter>
-        <Footer />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Footer />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const nftButton = screen.getByText("NFT");

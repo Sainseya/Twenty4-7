@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,14 @@ import CartDropdown from "../Cart/CartDropdown";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
+import { isPageValid } from "../../Utils/ValidePages";
+import { useTheme } from "../../Utils/ThemeContext";
 
 const Topbar: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const [darkMode, setDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const isDarkMode = document.documentElement.classList.contains("dark");
-  const LogoComponent = isDarkMode ? LogoDark : LogoLight;
+  const LogoComponent = theme === 'dark' ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
 
@@ -19,29 +21,27 @@ const Topbar: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const navigateTolink = (link: string) => {
-    navigate(link);
+  const navigateToPage = (page: string) => {
+    if(isPageValid(page)) {
+      navigate(`/${page.toLowerCase()}`);
+    } else {
+      navigate("/404");
+    }
+    window.scrollTo(0, 0);
   };
 
   const handleThemeToggle = () => {
+    toggleTheme();
     setDarkMode(!darkMode);
-    localStorage.setItem("theme", !darkMode ? "dark" : "light");
-
-    const html = document.documentElement;
-    html.classList.toggle("dark");
   };
 
-  //? Load theme from local storage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
+    if (theme === "dark") {
       setDarkMode(true);
-      document.documentElement.classList.add("dark");
     } else {
       setDarkMode(false);
-      document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [theme]);
 
   return (
     <div
@@ -52,7 +52,7 @@ const Topbar: React.FC = () => {
         <button
           type="button"
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
-          onClick={() => navigateTolink("/")}
+          onClick={() => navigateToPage("")}
         >
           <LogoComponent style={{ width: "48px", height: "48px" }} data-testid="logo"/>
           <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
@@ -101,7 +101,7 @@ const Topbar: React.FC = () => {
         <button
           type="button"
           data-testid="user-icon"
-          onClick={() => navigateTolink("/connexion")}
+          onClick={() => navigateToPage("connexion")}
         >
           <FaUser size={32} className="text-txtBlack dark:text-txtWhite" />
         </button>
