@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, useNavigate } from "react-router";
+import { ThemeProvider } from "../../../Utils/ThemeContext";
 import Topbar from "../../../Components/navigation/Topbar";
 
 const mockedUsedNavigate = jest.fn();
@@ -12,9 +13,11 @@ jest.mock('react-router', () => ({
 describe("Topbar component", () => {
   test('contains search input with placeholder "Search..."', () => {
     render(
-      <MemoryRouter>
-        <Topbar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Topbar />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const searchInput = screen.getByPlaceholderText("Search...");
@@ -23,9 +26,11 @@ describe("Topbar component", () => {
 
   test("renders brand name correctly", () => {
     render(
-      <MemoryRouter>
-        <Topbar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Topbar />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const brandName = screen.getByText('Twenty4/7');
@@ -34,9 +39,11 @@ describe("Topbar component", () => {
 
   test("renders weather, cart, and user icons", () => {
     render(
-      <MemoryRouter>
-        <Topbar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Topbar />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     expect(screen.getByTestId("theme-icon")).toBeInTheDocument();
@@ -48,9 +55,11 @@ describe("Topbar component", () => {
     (useNavigate() as jest.Mock).mockReturnValue(mockedUsedNavigate);
 
     render(
-      <MemoryRouter>
-        <Topbar />
-      </MemoryRouter>
+      <ThemeProvider>
+        <MemoryRouter>
+          <Topbar />
+        </MemoryRouter>
+      </ThemeProvider>
     );
 
     const brandName = screen.getByText('Twenty4/7');
