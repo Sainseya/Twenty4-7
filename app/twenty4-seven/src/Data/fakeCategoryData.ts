@@ -1,18 +1,27 @@
+import NftImg from "../Assets/Category/NFT collection categorie.jpg";
+import Bathwaterimg from "../Assets/Category/Collection Waterbath 2.jpg";
+import CoursesImg from "../Assets/Category/Collection Online Courses 3.jpg";
+import SoonImg from "../Assets/Category/Collection Soon 2.jpg";
+
 export const fakeCategoriesData = [
   {
     categoryName: "NFT",
-    imageUrl: "../Assets/Category/NFT collection categorie.jpg",
+    imageUrl: NftImg,
+    description: "lorum ipsum",
   },
   {
     categoryName: "Bathwater",
-    imageUrl: "../Assets/Category/Collection Waterbath 2.jpg",
+    imageUrl: Bathwaterimg,
+    description: "lorum ipsum",
   },
   {
     categoryName: "Courses",
-    imageUrl: "../Assets/Category/Collection Courses 3.jpg",
+    imageUrl: CoursesImg,
+    description: "lorum ipsum",
   },
   {
     categoryName: "Soon",
-    imageUrl: "../Assets/Category/Collection Soon 2.jpg",
+    imageUrl: SoonImg,
+    description: "lorum ipsum",
   },
 ];

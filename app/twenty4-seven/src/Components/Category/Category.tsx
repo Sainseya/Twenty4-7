@@ -1,60 +1,79 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from 'react-router-dom';
-import { fakeCategoriesData } from "../../Data/fakeCategoryData";
-import TestImage from "../../Assets/Category/Collection Online Courses 3.jpg"
+import { useNavigate } from "react-router-dom";
 import { extractDominantColor } from "../../Utils/colorExtractor";
 
 interface CategoriesProps {
-    categoryName: string;
+  categoryName: string;
+  imgPath?: string | null;
 }
 
-const Category: React.FC<CategoriesProps> = ({ categoryName }) => {
-  const [buttonStyle, setButtonStyle] = useState({ backgroundColor: 'transparent' });
+const Category: React.FC<CategoriesProps> = ({
+  categoryName,
+  imgPath = null,
+}) => {
+  const [buttonStyle, setButtonStyle] = useState({
+    backgroundColor: "#F9FAFB",
+  });
   const formatCategoryName = categoryName.toLowerCase();
   let navigate = useNavigate();
-  // const categoryData = fakeCategoriesData.find(
-  //   (category) => category.categoryName === categoryName
-  // );
+
+  console.log("IMG path : " + imgPath);
   
-  // if (!categoryData) {
-  //   return null;
-  // }
-  
-  // const { imageUrl } = categoryData;
-  // console.log(imageUrl);
 
   useEffect(() => {
+    if (!imgPath) {
+      return;
+    }
+
     // Extraire la couleur principale de l'image
-    extractDominantColor(TestImage)
-      .then(dominantColor => {
+    extractDominantColor(imgPath)
+      .then((dominantColor) => {
         // Convertir la couleur RVB en chaîne hexadécimale
-        const colorHex = `#${((1 << 24) + (dominantColor[0] << 16) + (dominantColor[1] << 8) + dominantColor[2]).toString(16).slice(1)}`;
+        const colorHex = `#${(
+          (1 << 24) +
+          (dominantColor[0] << 16) +
+          (dominantColor[1] << 8) +
+          dominantColor[2]
+        )
+          .toString(16)
+          .slice(1)}`;
         // Mettre à jour le style du bouton avec la couleur extraite
         setButtonStyle({ backgroundColor: colorHex });
       })
-      .catch(error => {
-        console.error("Erreur lors de l'extraction de la couleur principale :", error);
+      .catch((error) => {
+        console.error(
+          "Erreur lors de l'extraction de la couleur principale :",
+          error
+        );
       });
-  }, []);
+  }, [imgPath]);
 
-
-   const navigateToCategory = () => {
-      navigate(`/${formatCategoryName}`);
-      window.scrollTo(0, 0);
-   }
+  const navigateToCategory = () => {
+    navigate(`/${formatCategoryName}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
       whileTap={{ rotate: 5 }}
       style={buttonStyle}
-      className="flex relative h-72 mx-2 rounded-xl border border-light_border dark:border-dark_border items-center justify-center"
+      className="flex relative h-72 min-w-28 flex-grow mx-2 rounded-xl border-2 border-light_border dark:border-dark_border items-center justify-center"
       onClick={navigateToCategory}
     >
-      <img id="imgID" src={TestImage} alt={categoryName} className="object-contain size-72 rounded-xl border-4 border-light_border dark:border-dark_border" />
-      {/* <p className="absolute bottom-1 text-center font-semibold text-2xl">{categoryName}</p> */}
-      
+      {imgPath ? (
+        <img
+          id="imgID"
+          src={imgPath}
+          alt={categoryName}
+          className="object-cover size-64 rounded-xl"
+        />
+      ) : (
+        <p className="text-center font-semibold text-2xl">
+          {categoryName}
+        </p>
+      )}
     </motion.button>
   );
 };
