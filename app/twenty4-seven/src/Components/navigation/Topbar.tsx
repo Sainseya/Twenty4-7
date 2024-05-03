@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,13 @@ import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { isPageValid } from "../../Utils/ValidePages";
+import { useTheme } from "../../Utils/ThemeContext";
 
 const Topbar: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const [darkMode, setDarkMode] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const isDarkMode = document.documentElement.classList.contains("dark");
-  const LogoComponent = isDarkMode ? LogoDark : LogoLight;
+  const LogoComponent = theme === 'dark' ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
 
@@ -30,24 +31,9 @@ const Topbar: React.FC = () => {
   };
 
   const handleThemeToggle = () => {
+    toggleTheme();
     setDarkMode(!darkMode);
-    localStorage.setItem("theme", !darkMode ? "dark" : "light");
-
-    const html = document.documentElement;
-    html.classList.toggle("dark");
   };
-
-  //? Load theme from local storage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
 
   return (
     <div

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 // import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './CSS/MainStyle.css';
+import { ThemeProvider } from './Utils/ThemeContext';
 import Authentification from './Pages/Authentification';
 import Homepage from './Pages/Homepage';
 import NFTpage from './Pages/NFTpage';
@@ -14,14 +15,16 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path='/connexion' element={<Authentification />}></Route>
-        <Route path='/' element={<Homepage />}></Route>
-        <Route path='/nft' element={<NFTpage />}></Route>
-        <Route path='/404' element={<Page404 />}></Route>
-      </Routes>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <Routes>
+          <Route path='/connexion' element={<Authentification />}></Route>
+          <Route path='/' element={<Homepage />}></Route>
+          <Route path='/nft' element={<NFTpage />}></Route>
+          <Route path='/404' element={<Page404 />}></Route>
+        </Routes>
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

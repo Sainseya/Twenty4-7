@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
+import { useTheme } from "../../Utils/ThemeContext";
 import { isPageValid } from "../../Utils/ValidePages";
 
 const Footer: React.FC = () => {
-  const isDarkMode = document.documentElement.classList.contains("dark");
-  const LogoComponent = isDarkMode ? LogoDark : LogoLight;
-  
+  const { theme } = useTheme();
+  const LogoComponent = theme === 'dark' ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
 
