@@ -10,6 +10,7 @@ import { isPageValid } from "../../Utils/ValidePages";
 const Footer: React.FC = () => {
   const isDarkMode = document.documentElement.classList.contains("dark");
   const LogoComponent = isDarkMode ? LogoDark : LogoLight;
+  
 
   let navigate = useNavigate();
 
@@ -25,9 +26,9 @@ const Footer: React.FC = () => {
   return (
     <div
       id="footer"
-      className="px-4 divide-y divide-light_border dark:divide-dark_border bg-light_bg2 dark:bg-dark_bg2 border-t-2 border-light_border dark:border-dark_border"
+      className="px-44 divide-y divide-light_border dark:divide-dark_border bg-light_bg2 dark:bg-dark_bg2 border-t-2 border-light_border dark:border-dark_border"
     >
-      <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0 ">
+      <div className="flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0 ">
         <div className="lg:w-1/3">
           <div
             rel="noopener noreferrer"

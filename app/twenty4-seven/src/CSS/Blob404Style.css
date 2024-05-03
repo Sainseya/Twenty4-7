@@ -1,11 +1,6 @@
 /* Custom CSS for blobs */
 
-body {
-	margin: 0;
-	padding: 0;
-}
-
-.container {
+.containerBlob {
 	background:#f3f4f6;
 	min-height: 100vh;
     min-width: 100vw;
@@ -17,7 +12,7 @@ body {
 	position: relative;
 }
 
-html.dark .container {
+html.dark .containerBlob {
     background: #1a1c1f;
 }
 

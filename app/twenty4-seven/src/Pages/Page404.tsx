@@ -11,7 +11,7 @@ const Page404 = () => {
   };
 
   return (
-    <div className="container">
+    <div className="containerBlob">
       <div className="blob-c">
         <div className="shape-blob"></div>
         <div className="shape-blob one"></div>
