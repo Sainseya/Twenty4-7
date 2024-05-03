@@ -5,25 +5,30 @@ import CategoryPreviewReverse from "../Components/Category/CategoryPreviewRevers
 import NewBanner from "../Components/navigation/NewBanner";
 import Topbar from "../Components/navigation/Topbar";
 import Footer from "../Components/navigation/Footer";
+//? Fake Data
+import { fakeCategoriesData } from "../Data/fakeCategoryData"; 
 
 const Homepage: React.FC = () => {
-  const categories = ["NFT", "Bathwater", "Courses", "Soon",];
+  const categories = fakeCategoriesData.map(category => ({
+    categoryName: category.categoryName,
+    imageUrl: category.imageUrl,
+  }));
 
   return (
     <div className="min-h-screen bg-light_bg dark:bg-dark_bg">
       <Topbar />
       <NewBanner newsText="New Mineblock NFT Collection" linkToNewArrivages="nft" />
-      <CategoryCarousel categoryName={categories} />
+      <CategoryCarousel categories={categories} />
       <div className="relative flex flex-col w-full px-44 pt-1">
         <div id="seperator" className="absolute left-44 right-44 h-2 bg-light_border dark:bg-dark_border rounded-xl top-0"></div>
-        {categories.map((category, index) => (
+        {fakeCategoriesData.map((category, index) => (
           <React.Fragment key={index}>
-            {category.toLowerCase() !== "soon" && (
+            {category.categoryName.toLowerCase() !== "soon" && (
             <>
             {index % 2 === 0 ? (
-              <CategoryPreview categoryName={category} textCategory="fgfunhfouignhfu unifdghnfuihgfdigu nhgfd nuh" />
+              <CategoryPreview categoryName={category.categoryName} textCategory={category.description} />
             ) : (
-              <CategoryPreviewReverse categoryName={category} textCategory="fgfunhfouignhfu unifdghnfuihgfdigu nhgfd nuh" />
+              <CategoryPreviewReverse categoryName={category.categoryName} textCategory={category.description} />
             )}
             {index !== categories.length -2  && <div className="h-2 bg-light_border dark:bg-dark_border rounded-xl"></div>}
             </>
