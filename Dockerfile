@@ -1,6 +1,6 @@
 FROM php:latest
 
-WORKDIR /var/www/html/
+WORKDIR /var/www
 
 RUN apt-get update \
     &&  apt-get install -y --no-install-recommends \
@@ -32,12 +32,12 @@ RUN npm install --global yarn
 
 CMD ["php", "bin/console", "make:migration", "&&", "php", "bin/console", "doctrine:migrations:migrate", "&&", "php", "bin/console", "doctrine:schema:update", "--force"]
 # Définition des variables d'environnement
-# ENV GIT_USER_NAME "nseya"
-# ENV GIT_USER_EMAIL "sainseya0x0@gmail.com"
+ENV GIT_USER_NAME "nseya"
+ENV GIT_USER_EMAIL "sainseya0x0@gmail.com"
 
-# # Configuration de git avec les variables d'environnement
-# RUN git config --global user.name "$GIT_USER_NAME" \
-#     && git config --global user.email "$GIT_USER_EMAIL"
+# Configuration de git avec les variables d'environnement
+RUN git config --global user.name "$GIT_USER_NAME" \
+    && git config --global user.email "$GIT_USER_EMAIL"
 
 CMD ["composer install"]
 
