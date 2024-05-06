@@ -25,10 +25,16 @@ RUN docker-php-ext-configure \
 
 RUN pecl install apcu && docker-php-ext-enable apcu
 
-# RUN composer require symfony/orm-pack \
-# && composer require doctrine/doctrine-migrations-bundle "^3.0"
-
 RUN npm install --global yarn
+
+RUN COMPOSER_ALLOW_SUPERUSER=1
+
+RUN composer require symfony/orm-pack \
+    && composer require doctrine/common \
+    # && composer require symfony/routing \
+    # && composer require maker --dev \
+    && composer require symfony/maker-bundle
+
 
 CMD ["php", "bin/console", "make:migration", "&&", "php", "bin/console", "doctrine:migrations:migrate", "&&", "php", "bin/console", "doctrine:schema:update", "--force"]
 # Définition des variables d'environnement
@@ -41,11 +47,6 @@ RUN git config --global user.name "$GIT_USER_NAME" \
 
 CMD ["composer install"]
 
-# RUN COMPOSER_ALLOW_SUPERUSER=1
 
-CMD ["composer require symfony/orm-pack"]
-CMD ["composer require doctrine"]
-CMD ["composer require symfony/routing"]
-CMD ["composer require maker --dev"]
 
 CMD tail -f /dev/null
