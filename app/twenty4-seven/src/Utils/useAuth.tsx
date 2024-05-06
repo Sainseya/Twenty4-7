@@ -3,9 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
-  //   const [name, setName] = useState("");
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +17,7 @@ const useAuth = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(response.data);
+      //console.log(response.data);
       localStorage.setItem("token", response.data.token); //! Tempo
       navigate("/");
     } catch (error) {
@@ -43,8 +40,6 @@ const useAuth = () => {
     const lastname = nameArray.slice(1).join(" ");
     const data = { firstname, lastname, email: formData.email, password: formData.password };
 
-    console.log("Sing Up Data : " + data);
-
     await handleCommonSubmit("register", data);
   };
 
@@ -52,7 +47,6 @@ const useAuth = () => {
     e.preventDefault();
 
     const data = { email: formData.email, password: formData.password };
-    console.log("Login Data : " + data);
 
     await handleCommonSubmit("login", data);
   };
