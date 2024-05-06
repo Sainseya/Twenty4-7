@@ -1,73 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { SiMaildotru } from "react-icons/si";
 import { FaRegUser } from "react-icons/fa";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 import TextInput from "../Components/Input/TextInput";
 import PasswordInput from "../Components/Input/PasswordInput";
+//Hook
+import useAuth from "../Utils/useAuth";
 
 const Authentification: React.FC = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const ENDPOINT = "http://localhost:8000";
-
-  let navigate = useNavigate();
-
-  const handleSubmitSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!name.includes(" ")) {
-      console.error(
-        "Error: The name field must contain both first name and last name."
-      );
-      return;
-    }
-
-    const nameArray = name.split(" ");
-    const firstname = nameArray[0];
-    const lastname = nameArray.slice(1).join(" ");
-    const data = { firstname, lastname, email, password };
-
-    console.log("Sing Up Data : " + data);
-
-    try {
-      const response = await axios.post(
-        `${ENDPOINT}/register`,
-        data,
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      console.log(response.data);
-      localStorage.setItem('token', response.data.token);
-      navigate("/");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const handleSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const data = { email, password }
-    console.log("Login Data : " + data);
-    
-    try {
-      const response = await axios.post(
-        `${ENDPOINT}/login`,
-        data,
-        { headers: { "Content-Type": "application/json" } }
-      );
-      
-      console.log(response.data);
-      navigate("/");
-    } catch (error) {
-      console.error('Error:', error); 
-      // Afficher un message d'erreur à l'utilisateur ou prendre d'autres mesures nécessaires
-    }
-  };
+  const { formData, setFormData, handleSubmitSignUp, handleSubmitLogin } = useAuth();
 
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
@@ -98,9 +40,9 @@ const Authentification: React.FC = () => {
                         placeholder="Enter your name"
                         icon={<FaRegUser />}
                         isRequired={true}
-                        value={name}
+                        value={formData.name}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setName(e.target.value)
+                          setFormData({ ...formData, name: e.target.value })
                         }
                       />
                       <TextInput
@@ -109,18 +51,18 @@ const Authentification: React.FC = () => {
                         placeholder="Enter your email"
                         icon={<SiMaildotru />}
                         isRequired={true}
-                        value={email}
+                        value={formData.email}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setEmail(e.target.value)
+                          setFormData({ ...formData, email: e.target.value })
                         }
                       />
                       <PasswordInput
                         label="Password"
                         placeholder="Enter your password"
                         icon={<HiOutlineFingerPrint />}
-                        value={password}
+                        value={formData.password}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setPassword(e.target.value)
+                          setFormData({ ...formData, password: e.target.value })
                         }
                       />
                       <div className="flex items-center">
@@ -202,18 +144,20 @@ const Authentification: React.FC = () => {
                         placeholder="Enter your email"
                         icon={<SiMaildotru />}
                         isRequired={true}
-                        value={email}
+                        value={formData.email}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setEmail(e.target.value)}
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                       <PasswordInput
                         label="Password"
                         placeholder="Enter your password"
                         icon={<HiOutlineFingerPrint />}
                         showForgotPassword={false}
-                        value={password}
+                        value={formData.password}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          setPassword(e.target.value)}
+                          setFormData({ ...formData, password: e.target.value })
+                        }
                       />
                       <div>
                         <button
