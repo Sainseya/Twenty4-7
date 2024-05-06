@@ -5,9 +5,12 @@ interface TextInputProps {
     type: string;
     placeholder: string;
     icon?: ReactNode; //* Optionnel: permet de spécifier une icône pour le champ de texte
+    isRequired?: boolean;
+    value?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
 
-const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon }) => {
+const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon, isRequired, value, onChange }) => {
     return (
       <div>
         <label htmlFor="" className="text-base font-medium text-gray-900">
@@ -24,6 +27,9 @@ const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon })
             type={type}
             placeholder={placeholder}
             className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+            required={isRequired}
+            value={value}
+            onChange={onChange}
           />
         </div>
       </div>

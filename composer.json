@@ -1,5 +1,6 @@
 {
     "require": {
-        "lexik/jwt-authentication-bundle": "^2.21"
+        "lexik/jwt-authentication-bundle": "^2.21",
+        "nelmio/cors-bundle": "^2.4"
     }
 }

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
-class OrderProductController extends AbstractController
+class ProductController extends AbstractController
 {
     private $doctrine;
 
