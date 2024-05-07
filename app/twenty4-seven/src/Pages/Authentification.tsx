@@ -1,12 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { SiMaildotru } from "react-icons/si";
 import { FaRegUser } from "react-icons/fa";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 import TextInput from "../Components/Input/TextInput";
 import PasswordInput from "../Components/Input/PasswordInput";
+//Hook
+import useAuth from "../Utils/useAuth";
 
 const Authentification: React.FC = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const { formData, setFormData, handleSubmitSignUp, handleSubmitLogin } = useAuth();
 
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
@@ -29,30 +32,45 @@ const Authentification: React.FC = () => {
             <div className="relative max-w-md mx-auto mt-8 md:mt-16">
               <div className="overflow-hidden bg-white rounded-md shadow-md">
                 <div className="px-4 py-6 sm:px-8 sm:py-7">
-                  <form action="">
+                  <form onSubmit={handleSubmitSignUp}>
                     <div className="space-y-5">
                       <TextInput
                         label="Firstname and lastname"
                         type="text"
                         placeholder="Enter your name"
                         icon={<FaRegUser />}
+                        isRequired={true}
+                        value={formData.name}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                       />
                       <TextInput
                         label="Email address"
                         type="email"
                         placeholder="Enter your email"
                         icon={<SiMaildotru />}
+                        isRequired={true}
+                        value={formData.email}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                       <PasswordInput
                         label="Password"
                         placeholder="Enter your password"
                         icon={<HiOutlineFingerPrint />}
+                        value={formData.password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setFormData({ ...formData, password: e.target.value })
+                        }
                       />
                       <div className="flex items-center">
                         <input
                           type="checkbox"
                           name="agree"
                           id="agree"
+                          required
                           className="w-5 h-5 text-green-500 bg-white border-gray-200 rounded"
                         />
 
@@ -118,19 +136,28 @@ const Authentification: React.FC = () => {
             <div className="relative max-w-md mx-auto mt-8 md:mt-16">
               <div className="overflow-hidden bg-white rounded-md shadow-md">
                 <div className="px-4 py-6 sm:px-8 sm:py-7">
-                  <form action="#" method="POST">
+                  <form onSubmit={handleSubmitLogin}>
                     <div className="space-y-5">
                       <TextInput
                         label="Email address"
                         type="email"
                         placeholder="Enter your email"
                         icon={<SiMaildotru />}
+                        isRequired={true}
+                        value={formData.email}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                       />
                       <PasswordInput
                         label="Password"
                         placeholder="Enter your password"
                         icon={<HiOutlineFingerPrint />}
                         showForgotPassword={false}
+                        value={formData.password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          setFormData({ ...formData, password: e.target.value })
+                        }
                       />
                       <div>
                         <button

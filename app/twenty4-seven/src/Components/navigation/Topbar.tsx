@@ -3,6 +3,7 @@ import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import CartDropdown from "../Cart/CartDropdown";
+import UserDropdown from "../User/UserDropdown";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
 import { ReactComponent as LogoLight } from "../../Assets/LogoWebLight.svg";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
@@ -12,17 +13,29 @@ import { useTheme } from "../../Utils/ThemeContext";
 const Topbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [darkMode, setDarkMode] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const LogoComponent = theme === 'dark' ? LogoDark : LogoLight;
+  const [isDropdownCartOpen, setIsDropdownCartOpen] = useState(false);
+  const [isDropdownUserOpen, setIsDropdownUserOpen] = useState(false);
+  const LogoComponent = theme === "dark" ? LogoDark : LogoLight;
 
   let navigate = useNavigate();
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+  const isUserLogin = localStorage.getItem("token") ? true : false;
+
+  const toggleDropdownCart = () => {
+    setIsDropdownCartOpen(!isDropdownCartOpen);
+    setIsDropdownUserOpen(false);
+  };
+
+  const toggleDropdownUser = () => {
+    if(!isUserLogin) {
+      navigateToPage("connexion");
+    }
+    setIsDropdownUserOpen(!isDropdownUserOpen);
+    setIsDropdownCartOpen(false);
   };
 
   const navigateToPage = (page: string) => {
-    if(isPageValid(page)) {
+    if (isPageValid(page)) {
       navigate(`/${page.toLowerCase()}`);
     } else {
       navigate("/404");
@@ -54,7 +67,10 @@ const Topbar: React.FC = () => {
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
           onClick={() => navigateToPage("")}
         >
-          <LogoComponent style={{ width: "48px", height: "48px" }} data-testid="logo"/>
+          <LogoComponent
+            style={{ width: "48px", height: "48px" }}
+            data-testid="logo"
+          />
           <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
             Twenty4/7
           </span>
@@ -85,25 +101,31 @@ const Topbar: React.FC = () => {
           type="button"
           data-testid="cart-icon"
           className="relative"
-          onClick={toggleDropdown}
+          onClick={toggleDropdownCart}
         >
           <FaCartShopping
             size={32}
             className="text-txtBlack dark:text-txtWhite"
           />
           <CartDropdown
-            isDropdownOpen={isDropdownOpen}
+            isDropdownOpen={isDropdownCartOpen}
             itemsInCart={0}
-            closeDropdown={() => setIsDropdownOpen(false)}
+            closeDropdown={() => setIsDropdownCartOpen(false)}
           />
         </button>
 
         <button
           type="button"
           data-testid="user-icon"
-          onClick={() => navigateToPage("connexion")}
+          onClick={toggleDropdownUser}
         >
           <FaUser size={32} className="text-txtBlack dark:text-txtWhite" />
+          {isUserLogin && (
+            <UserDropdown
+              isDropdownOpen={isDropdownUserOpen}
+              closeDropdown={() => setIsDropdownUserOpen(false)}
+            />
+          )}
         </button>
       </div>
     </div>

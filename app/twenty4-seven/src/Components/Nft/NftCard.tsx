@@ -26,6 +26,7 @@ const NftCard: React.FC<NftCardProps> = ({ price, idCard }) => {
           src={NftImage}
           alt="nftImg"
           className="rounded-xl"
+          loading="lazy"
         ></motion.img>
       </div>
       <div className="flex-1 flex flex-col justify-between w-full h-8 px-4 bg-light_card dark:bg-dark_bg2 rounded-b-lg">

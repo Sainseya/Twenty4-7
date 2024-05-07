@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import PasswordInput from "../../../Components/Input/PasswordInput";
 
-test("render PasswordInput with correct props", () => {
+test("render PasswordInput with correct props", () => { 
   render(<PasswordInput label="Password" placeholder="Enter your password" />);
 
   const labelElement = screen.getByText(/Password/i);

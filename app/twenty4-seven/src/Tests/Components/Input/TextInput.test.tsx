@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TextInput from "../../../Components/Input/TextInput";
 
-// Test de base pour vérifier que le TextInput rend correctement avec les props données
 test("renders TextInput with correct props", () => {
   render(<TextInput label="Name" type="text" placeholder="Enter your name" />);
 
