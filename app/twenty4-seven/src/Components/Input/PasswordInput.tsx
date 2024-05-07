@@ -6,6 +6,8 @@ interface PasswordInputProps {
   placeholder: string;
   icon?: ReactNode; //* Optionnel: permet de spécifier une icône pour le champ de texte
   showForgotPassword?: boolean; //* Optionnel: afficher le lien "Forgot password"
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -13,6 +15,8 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   placeholder,
   icon,
   showForgotPassword = false,
+  value,
+  onChange
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -51,6 +55,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           id="passwordInput"
           placeholder={placeholder}
           className="block w-full py-4 pl-10 pr-14 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+          required
+          value={value}
+          onChange={onChange}
         />
 
         <div

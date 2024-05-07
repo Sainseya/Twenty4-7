@@ -63,6 +63,7 @@ const Category: React.FC<CategoriesProps> = ({ categoryName, imgPath = null }) =
           src={imgPath}
           alt={categoryName}
           className="object-cover size-64 rounded-xl"
+          loading="lazy"
         />
       ) : (
         <p className="text-center font-semibold text-2xl">{categoryName}</p>
