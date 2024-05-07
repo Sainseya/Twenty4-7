@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextInput from "../Input/TextInput";
 import useUpdateUser from "../../Utils/useUpdateUser";
 import { motion } from "framer-motion";
