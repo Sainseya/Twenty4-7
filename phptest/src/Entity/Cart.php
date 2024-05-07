@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\CartRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 class Cart
@@ -21,12 +23,39 @@ class Cart
     #[ORM\Column(nullable: true)]
     private ?int $orderID = null;
 
+    private ?Collection $items = null;
+
+    public function __construct()
+    {
+        // Initialisez $items à une ArrayCollection vide dans le constructeur
+        $this->items = new ArrayCollection();
+    }
+
+    public function setItem(CartProduct $item): self
+    {
+        if ($this->items === null) {
+            $this->items = new ArrayCollection();
+        }
+
+        if (!$this->items->contains($item)) {
+            $this->items[] = $item;
+            $item->setCart($this);
+        }
+
+        return $this;
+    }
+
+    public function getItems(): ?Collection
+    {
+        return $this->items;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): static
+    public function setId(int $id): self
     {
         $this->id = $id;
 
