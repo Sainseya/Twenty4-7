@@ -2,6 +2,8 @@ name: Frontend CI
 
 on:
   push:
+    paths:
+      - 'app/twenty4-seven/**'
     branches:
       - main
       - dev
