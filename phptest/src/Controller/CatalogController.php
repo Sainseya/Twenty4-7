@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Catalog;
 use App\Entity\Product;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 class CatalogController extends AbstractController
 {
@@ -74,4 +75,34 @@ class CatalogController extends AbstractController
             'products' => $productData,
         ]);
     }
+
+    /**
+     * Get all products
+     */
+    #[Route('/api/catalog', methods: ['GET'])]
+    public function getAllCatalog(): JsonResponse
+    {
+        $catalogRepository = $this->doctrine->getRepository(Catalog::class);
+        $catalog = $catalogRepository->findAll();
+
+        if (empty($catalog)) {
+            return new JsonResponse([
+                'message' => 'No products found!',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $productArray = [];
+        foreach ($catalog as $item) {
+            $catalogArray[] = [
+                'id' => $item->getId(),
+                'type' => $item->getType(),
+                'bio' => $item->getBio(),
+            ];
+        }
+
+        return new JsonResponse([
+            'catalogs' => $catalogArray,
+        ], Response::HTTP_OK);
+    }
+
 }
