@@ -22,6 +22,23 @@ class CartProduct
     #[ORM\Column]
     private ?int $quantity = null;
 
+
+    public function getItem(int $productId): ?CartProduct
+    {
+        if ($this->product !== null) {
+            foreach ($this->product as $item) {
+                if ($item->getProduct()->getId() === $productId) {
+                    return $item;
+                }
+            }
+        }
+        return null;
+    }
+
+    public function removeItem(CartProduct $itemToRemove): void
+    {
+        $this->product->removeElement($itemToRemove);
+    }
     public function getId(): ?int
     {
         return $this->id;

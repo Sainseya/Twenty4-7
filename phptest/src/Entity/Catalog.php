@@ -43,7 +43,6 @@ class Catalog
             $this->products[] = $product;
             $product->setCatalog($this);
         }
-
         return $this;
     }
 
@@ -55,7 +54,6 @@ class Catalog
     public function setType(string $type): self
     {
         $this->type = $type;
-
         return $this;
     }
 
@@ -67,7 +65,6 @@ class Catalog
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;
-
         return $this;
     }
 }
