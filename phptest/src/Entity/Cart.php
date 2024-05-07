@@ -50,6 +50,23 @@ class Cart
         return $this->items;
     }
 
+    public function getItem(int $productId): ?CartProduct
+    {
+        if ($this->items !== null) {
+            foreach ($this->items as $item) {
+                if ($item->getProduct()->getId() === $productId) {
+                    return $item;
+                }
+            }
+        }
+        return null;
+    }
+
+    public function removeItem(CartProduct $itemToRemove): void
+    {
+        $this->items->removeElement($itemToRemove);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
