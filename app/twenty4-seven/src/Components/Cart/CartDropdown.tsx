@@ -49,7 +49,7 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
               <button
                 type="button"
                 className="px-4 py-2 my-2 rounded-xl bg-purpleButton text-txtWhite text-sm font-semibold relative"
-                onClick={() => navigateToCart("shoppingcart")}
+                onClick={() => navigateToCart("cart")}
                 data-testid="go to cart"
               >
                 Go to cart
