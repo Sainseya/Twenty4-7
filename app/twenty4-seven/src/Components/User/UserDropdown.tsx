@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isPageValid } from "../../Utils/ValidePages";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
+import UserInfoModal from "./UserInfoModal";
 
 interface UserDropdownProps {
   isDropdownOpen: boolean;
@@ -14,6 +15,11 @@ const UserDropdown: React.FC<UserDropdownProps> = ({
   closeDropdown,
 }) => {
   let navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModalInfo = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   const navigateToLink = (page: string) => {
     if (page === "connexion" && localStorage.getItem("token")) {
@@ -43,10 +49,12 @@ const UserDropdown: React.FC<UserDropdownProps> = ({
             <button
               type="button"
               className="flex h-6 w-full flex-row justify-center items-center gap-4"
-              onClick={() => {}} //! Change to modal component to change account info
+              onClick={toggleModalInfo}
             >
               <FaUser size={18} className="dark:text-txtWhite" />
-              <div className="flex-1 text-right dark:text-txtWhite">Account</div>
+              <div className="flex-1 text-right dark:text-txtWhite">
+                Account
+              </div>
             </button>
             <button
               type="button"
@@ -63,11 +71,14 @@ const UserDropdown: React.FC<UserDropdownProps> = ({
               onClick={() => navigateToLink("connexion")}
             >
               <ImExit size={18} className="dark:text-txtWhite ml-1" />
-              <div className="flex-1 text-right dark:text-txtWhite">Log Out</div>
+              <div className="flex-1 text-right dark:text-txtWhite">
+                Log Out
+              </div>
             </button>
           </div>
         </div>
       )}
+      {isModalOpen && <UserInfoModal closeModal={toggleModalInfo} />}
     </>
   );
 };
