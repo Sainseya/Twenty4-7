@@ -12,7 +12,7 @@ interface UserInfoModalProps {
 }
 
 const UserInfoModal: React.FC<UserInfoModalProps> = ({ closeModal }) => {
-  const { formData, setFormData } = useUpdateUser();
+  const { formData, setFormData, handleSubmit } = useUpdateUser();
 
   return (
     <div
@@ -32,7 +32,7 @@ const UserInfoModal: React.FC<UserInfoModalProps> = ({ closeModal }) => {
         <div className="flex justify-center items-center p-4 font-semibold text-xl dark:text-txtWhite">
           Edit your profil
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-6 group">
               <TextInput
