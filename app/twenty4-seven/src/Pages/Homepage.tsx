@@ -7,11 +7,20 @@ import Topbar from "../Components/navigation/Topbar";
 import Footer from "../Components/navigation/Footer";
 //? Fake Data
 import { fakeCategoriesData } from "../Data/fakeCategoryData"; 
+import useCategory from "../Utils/useCategory";
 
 const Homepage: React.FC = () => {
+  const { categoryData } = useCategory();
+
+  const getCategoryImageUrl = (categoryName: string): string => {
+    console.log(`../../Assets/Category/${categoryName}.jpg`);
+    
+    return `../../Assets/Category/${categoryName}.jpg`
+  }
+
   const categories = fakeCategoriesData.map(category => ({
     categoryName: category.categoryName,
-    imageUrl: category.imageUrl,
+    imageUrl: getCategoryImageUrl(category.categoryName),
   }));
 
   return (
