@@ -8,9 +8,10 @@ import Footer from "../Components/navigation/Footer";
 //? Fake Data
 import { fakeCategoriesData } from "../Data/fakeCategoryData"; 
 import useCategory from "../Utils/useCategory";
+import { capitalizeWords } from "../Utils/Tools";
 
 const Homepage: React.FC = () => {
-  const { categoryData, fetchData, capitalizeWords } = useCategory();
+  const { categoryData, fetchData } = useCategory();
 
   useEffect(() => {
     fetchData()
