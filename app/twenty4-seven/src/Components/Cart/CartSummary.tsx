@@ -6,14 +6,14 @@ interface CartSummaryProps {
   subtotalPrice: number;
   taxe?: number;
   shippingPrice?: number;
-  haveNft?: boolean;
+  allNft?: boolean;
 }
 
 const CartSummary: React.FC<CartSummaryProps> = ({
   subtotalPrice,
   taxe = 0,
   shippingPrice = 0,
-  haveNft = false,
+  allNft: haveNft = false,
 }) => {
   const totalPrice = (subtotalPrice + taxe + shippingPrice).toFixed(2);
 

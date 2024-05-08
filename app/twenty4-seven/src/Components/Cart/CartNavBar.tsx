@@ -8,7 +8,7 @@ interface CartNavBarProps {
 
 const CartNavBar: React.FC<CartNavBarProps> = ({ setActiveIndex, activeIndex }) => {
   return (
-    <div className="h-16 flex items-center text-xl font-semibold gap-5">
+    <div className="h-16 flex items-center text-lg font-semibold gap-5">
       <div>
         <RxHamburgerMenu
           size={32}

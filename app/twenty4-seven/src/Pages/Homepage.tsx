@@ -5,18 +5,17 @@ import CategoryPreviewReverse from "../Components/Category/CategoryPreviewRevers
 import NewBanner from "../Components/navigation/NewBanner";
 import Topbar from "../Components/navigation/Topbar";
 import Footer from "../Components/navigation/Footer";
-//? Fake Data
-import { fakeCategoriesData } from "../Data/fakeCategoryData"; 
 import useCategory from "../Utils/useCategory";
 import { capitalizeWords } from "../Utils/Tools";
+//? Fake Data
+import { fakeCategoriesData } from "../Data/fakeCategoryData"; 
 
 const Homepage: React.FC = () => {
-  const { categoryData, fetchData } = useCategory();
+  const { fetchData } = useCategory();
 
   useEffect(() => {
     fetchData()
   },[]);
-
 
   const categories = fakeCategoriesData.map(category => ({
     categoryName: category.categoryName,
