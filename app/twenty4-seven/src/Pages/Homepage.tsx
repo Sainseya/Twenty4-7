@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CategoryCarousel from "../Components/Category/CategoryCarousel";
 import CategoryPreview from "../Components/Category/CategoryPreview";
 import CategoryPreviewReverse from "../Components/Category/CategoryPreviewReverse";
@@ -10,17 +10,15 @@ import { fakeCategoriesData } from "../Data/fakeCategoryData";
 import useCategory from "../Utils/useCategory";
 
 const Homepage: React.FC = () => {
-  const { categoryData } = useCategory();
+  const { categoryData, fetchData } = useCategory();
 
-  const getCategoryImageUrl = (categoryName: string): string => {
-    console.log(`../../Assets/Category/${categoryName}.jpg`);
-    
-    return `../../Assets/Category/${categoryName}.jpg`
-  }
+  useEffect(() => {
+    fetchData()
+  }, []);
 
-  const categories = fakeCategoriesData.map(category => ({
-    categoryName: category.categoryName,
-    imageUrl: getCategoryImageUrl(category.categoryName),
+  const categories = categoryData.map(category => ({
+    categoryName: category.type,
+    imageUrl: category.type,
   }));
 
   return (
