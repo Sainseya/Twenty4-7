@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { isPageValid } from "../../Utils/ValidePages";
 
@@ -15,10 +16,10 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
   closeDropdown,
 }) => {
   let navigate = useNavigate();
-  
+
   const navigateToCart = (page: string) => {
     closeDropdown();
-    if(isPageValid(page)) {
+    if (isPageValid(page)) {
       navigate(`/${page.toLowerCase()}`);
     } else {
       navigate("/404");
@@ -46,14 +47,15 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
         >
           {itemsInCart > 0 ? (
             <>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
                 type="button"
                 className="px-4 py-2 my-2 rounded-xl bg-purpleButton text-txtWhite text-sm font-semibold relative"
                 onClick={() => navigateToCart("cart")}
                 data-testid="go to cart"
               >
                 Go to cart
-              </button>
+              </motion.button>
 
               {Array.from({ length: itemsInCart }).map((_, index) => (
                 <div
@@ -65,14 +67,15 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
                   <p className="flex flex-1 p-2 text-left text-txtBlack dark:text-txtWhite">
                     Name
                   </p>
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
                     type="button"
                     className="h-6 w-6 px-1 rounded-full text-sm  font-bold text-red-600 text-center text-[10px]"
                     onClick={() => deleteItemInCart(index)}
                     data-testid="deleteBtn"
                   >
                     <FaRegTrashAlt size={20} />
-                  </button>
+                  </motion.button>
                   {index !== itemsInCart - 1 && (
                     <span className="absolute left-1/2 transform -translate-x-1/2 w-60 h-[2px] bottom-0 rounded bg-light_border dark:bg-dark_border"></span>
                   )}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import CartDropdown from "../Cart/CartDropdown";
 import UserDropdown from "../User/UserDropdown";
 import { ReactComponent as LogoDark } from "../../Assets/LogoWebDark.svg";
@@ -62,7 +63,8 @@ const Topbar: React.FC = () => {
       className="flex w-full h-16 border-b-2 border-light_border dark:border-dark_border bg-light_bg dark:bg-dark_bg justify-between items-center z-50 sticky top-0"
     >
       <div className="w-64 px-8 pt-1">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.05 }}
           type="button"
           className="flex items-center font-semibold text-txtBlack dark:text-txtWhite"
           onClick={() => navigateToPage("")}
@@ -74,7 +76,7 @@ const Topbar: React.FC = () => {
           <span className="font-semibold pl-2 text-txtBlack dark:text-txtWhite">
             Twenty4/7
           </span>
-        </button>
+        </motion.button>
       </div>
       <div className="flex flex-1 px-32 justify-center items-center">
         <div
