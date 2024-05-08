@@ -10,16 +10,19 @@ import { fakeCategoriesData } from "../Data/fakeCategoryData";
 import useCategory from "../Utils/useCategory";
 
 const Homepage: React.FC = () => {
-  const { categoryData, fetchData } = useCategory();
+  const { categoryData, fetchData, capitalizeWords } = useCategory();
 
   useEffect(() => {
     fetchData()
-  }, []);
+  },[]);
 
-  const categories = categoryData.map(category => ({
-    categoryName: category.type,
-    imageUrl: category.type,
+
+  const categories = fakeCategoriesData.map(category => ({
+    categoryName: category.categoryName,
+    imageUrl: category.imageUrl
   }));
+
+  console.log("Categories in homepage :", categories);
 
   return (
     <div className="min-h-screen bg-light_bg dark:bg-dark_bg">
@@ -33,9 +36,9 @@ const Homepage: React.FC = () => {
             {category.categoryName.toLowerCase() !== "soon" && (
             <>
             {index % 2 === 0 ? (
-              <CategoryPreview categoryName={category.categoryName} textCategory={category.description} />
+              <CategoryPreview categoryName={capitalizeWords(category.categoryName)} textCategory={category.description} imgPath={category.imageUrl} />
             ) : (
-              <CategoryPreviewReverse categoryName={category.categoryName} textCategory={category.description} />
+              <CategoryPreviewReverse categoryName={capitalizeWords(category.categoryName)} textCategory={category.description} imgPath={category.imageUrl} />
             )}
             {index !== categories.length -2  && <div className="h-2 bg-light_border dark:bg-dark_border rounded-xl"></div>}
             </>

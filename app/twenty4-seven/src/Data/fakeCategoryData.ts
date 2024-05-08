@@ -1,27 +1,27 @@
-// import NftImg from "../Assets/Category/NFT collection categorie.jpg";
-// import Bathwaterimg from "../Assets/Category/Collection Waterbath 2.jpg";
-// import CoursesImg from "../Assets/Category/Collection Online Courses 3.jpg";
-// import SoonImg from "../Assets/Category/Collection Soon 2.jpg";
+import NftImg from "../Assets/Category/nft.jpg";
+import Bathwaterimg from "../Assets/Category/bathwater.jpg";
+import CoursesImg from "../Assets/Category/courses.jpg";
+import SoonImg from "../Assets/Category/soon.jpg";
 
 export const fakeCategoriesData = [
   {
     categoryName: "nft",
-    // imageUrl: NftImg,
-    description: "lorum ipsum",
+    imageUrl: NftImg,
+    description: "Unique digital art pieces, certified and tradable on the Solana blockchain.",
   },
   {
     categoryName: "bathwater",
-    // imageUrl: Bathwaterimg,
-    description: "lorum ipsum",
+    imageUrl: Bathwaterimg,
+    description: "An exclusive experience where every drop is infused with luxury and relaxation.",
   },
   {
-    categoryName: "Courses",
-    // imageUrl: CoursesImg,
-    description: "lorum ipsum",
+    categoryName: "courses",
+    imageUrl: CoursesImg,
+    description: "Engage in enriching learning experiences from the comfort of your home with our diverse online course offerings.",
   },
   {
-    categoryName: "Soon",
-    // imageUrl: SoonImg,
-    description: "lorum ipsum",
+    categoryName: "soon",
+    imageUrl: SoonImg,
+    description: "Stay tuned! Exciting new releases coming soon, stay connected.",
   },
 ];
