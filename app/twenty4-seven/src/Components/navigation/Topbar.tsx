@@ -109,7 +109,7 @@ const Topbar: React.FC = () => {
           />
           <CartDropdown
             isDropdownOpen={isDropdownCartOpen}
-            itemsInCart={0}
+            itemsInCart={1}
             closeDropdown={() => setIsDropdownCartOpen(false)}
           />
         </button>
