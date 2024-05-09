@@ -20,10 +20,11 @@ class CatalogController extends AbstractController
         $this->doctrine = $doctrine;
     }
 
-    #[Route('/catalog/create', name: 'app_catalog_create', methods: ['POST'])]
+    #[Route('/api/catalog/create', name: 'app_catalog_create', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
+        
 
         $catalog = new Catalog();
         $catalog->setType($data['type']);
@@ -43,7 +44,7 @@ class CatalogController extends AbstractController
         ]);
     }
 
-    #[Route('/catalog/{id}/products', name: 'app_catalog_products', methods: ['GET'])]
+    #[Route('/api/catalog/{id}/products', name: 'app_catalog_products', methods: ['GET'])]
     public function getProducts(int $id): JsonResponse
     {
         $catalog = $this->doctrine->getRepository(Catalog::class)->find($id);

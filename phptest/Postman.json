@@ -1,0 +1,131 @@
+GET /api/products
+
+response
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "description": "Description 1",
+        "price": 100.00
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "description": "Description 2",
+        "price": 200.00
+    }
+]
+
+GET /api/products/{id}
+
+response
+{
+    "id": 1,
+    "name": "Product 1",
+    "description": "Description 1",
+    "price": 100.00
+}
+
+POST /api/products
+
+{
+    "name": "Product Name",
+    "description": "Product Description",
+    "quantity": 10,
+    "photo": "product.jpg",
+    "price": 100.0,
+    "catalog_name": "Catalog Name"
+}
+
+response 
+{
+    "id": 3,
+    "name": "Product 3",
+    "description": "Description 3",
+    "price": 300.00
+}
+
+PUT /api/products/1
+Content-Type: application/json
+
+{
+    "name": "New Product Name",
+    "description": "New Product Description",
+    "status": "unavailable",
+    "quantity": 20,
+    "photo": "new_product.jpg",
+    "price": 200.0,
+    "catalog_id": 2
+}
+
+response 
+{
+    "id": 1,
+    "name": "Updated Product",
+    "description": "Updated Description",
+    "price": 150.00
+}
+
+DELETE /api/products/{id}
+{
+    "message": "Product deleted successfully"
+}
+
+CATALOG
+
+POST /api/catalog/create
+
+{
+    "type": "Catalog Type",
+    "bio": "Catalog Bio"
+}
+
+GET /api/catalog/{catalogId}/products
+
+USER
+
+POST /register
+
+{
+    "firstname": "First Name",
+    "username": "Username",
+    "lastname": "Last Name",
+    "role": "Role",
+    "email": "user@example.com",
+    "wallet": 100,
+    "bio": "User Bio",
+    "password": "Password"
+}
+
+POST /login
+
+{
+    "username": "Username",
+    "password": "Password"
+}
+
+PUT /api/user
+{
+    "firstname": "New First Name",
+    "lastname": "New Last Name",
+    "role": "New Role",
+    "email": "newuser@example.com",
+    "wallet": 200,
+    "bio": "New User Bio",
+    "password": "New Password"
+}
+DELETE /api/user
+{
+    "message": "User deleted successfully"
+}
+
+
+{
+    "name": "Test Product",
+    "description": "This is a test product",
+    "price": 99.99,
+    "catalog_id": 1,
+    "quantity":50,
+    "photo":"test",
+    "catalog_name":"cryptoFJF"
+}

@@ -23,7 +23,7 @@ class ProductController extends AbstractController
     /**
      * Add a product
      */
-    #[Route('/products', name: 'app_product_create', methods: ['POST'])]
+    #[Route('/api/products', name: 'app_product_create', methods: ['POST'])]
     public function create(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -71,7 +71,7 @@ class ProductController extends AbstractController
     /**
      * Get a product by his id
      */
-    #[Route('/products/{productId}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/api/products/{productId}', name: 'app_product_show', methods: ['GET'])]
     public function getProduct($productId): JsonResponse
     {
         $productRepository = $this->doctrine->getRepository(Product::class);
@@ -105,7 +105,7 @@ class ProductController extends AbstractController
     /**
      * Get a product by his catalog id
      */
-    #[Route('/products/{catalogId}/products', name: 'app_catalog_products', methods: ['GET'])]
+    #[Route('/api/products/{catalogId}/products', name: 'app_catalog_products', methods: ['GET'])]
     public function getProductsInCatalog($catalogId): JsonResponse
     {
         $productRepository = $this->doctrine->getRepository(Product::class);
@@ -139,7 +139,7 @@ class ProductController extends AbstractController
     /**
      * Get all products
      */
-    #[Route('/products', name: 'app_products_list', methods: ['GET'])]
+    #[Route('/api/products', name: 'app_products_list', methods: ['GET'])]
     public function getAllProducts(): JsonResponse
     {
         $productRepository = $this->doctrine->getRepository(Product::class);
@@ -178,7 +178,7 @@ class ProductController extends AbstractController
     /**
      * Delete a product by his Id
      */
-    #[Route('/products/{productId}', name: 'app_product_delete', methods: ['DELETE'])]
+    #[Route('/api/products/{productId}', name: 'app_product_delete', methods: ['DELETE'])]
     public function deleteProduct($productId): JsonResponse
     {
         $entityManager = $this->doctrine->getManager();
@@ -202,7 +202,7 @@ class ProductController extends AbstractController
     /**
      * Update a product by his Id
      */
-    #[Route('/products/{productId}', name: 'app_product_update', methods: ['PUT'])]
+    #[Route('/api/products/{productId}', name: 'app_product_update', methods: ['PUT'])]
     public function updateProduct(Request $request, $productId): JsonResponse
     {
         $entityManager = $this->doctrine->getManager();

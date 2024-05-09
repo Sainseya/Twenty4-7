@@ -22,6 +22,19 @@ class CartProduct
     #[ORM\Column]
     private ?int $quantity = null;
 
+    private $isInCart;
+
+    public function getIsInCart(): ?bool
+    {
+        return $this->isInCart;
+    }
+
+    public function setIsInCart(bool $isInCart): self
+    {
+        $this->isInCart = $isInCart;
+
+        return $this;
+    }
 
     public function getItem(int $productId): ?CartProduct
     {

@@ -28,7 +28,7 @@ class UserController extends AbstractController
         $this->jwtEncoder = $jwtEncoder;
     }
 
-    #[Route('/register', name: 'user_register', methods: ['POST'])]
+    #[Route('/api/register', name: 'user_register', methods: ['POST'])]
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, JWTTokenManagerInterface $JWTManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -60,7 +60,7 @@ class UserController extends AbstractController
         return new JsonResponse(['status' => 'User created', 'token' => $token], JsonResponse::HTTP_CREATED);
     }
 
-    #[Route('/login', name: 'user_login', methods: ['POST'])]
+    #[Route('/api/login', name: 'user_login', methods: ['POST'])]
     public function login(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, JWTTokenManagerInterface $JWTManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -182,5 +182,24 @@ class UserController extends AbstractController
             return $this->json(['error' => $e->getMessage()], 401);
         }
     }
+
+    #cheat route to get all users from database we love cybersecurity here
+    #[Route('/api/users', name: 'users_get_all', methods: ['GET'])]
+    public function getAllUsers(EntityManagerInterface $entityManager): JsonResponse
+    {
+    $userRepository = $entityManager->getRepository(User::class);
+    $users = $userRepository->findAll();
+
+    if (!$users) {
+        return $this->json(['status' => 'No users found'], 404);
+    }
+
+    $usersArray = array_map(function($user) {
+        return $user->toArray();
+    }, $users);
+
+    return $this->json(['status' => 'Users found', 'users' => $usersArray], 200);
+}
+
     }
     
