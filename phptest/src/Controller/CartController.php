@@ -143,6 +143,7 @@ class CartController extends AbstractController
                 'product_id' => $product->getId(),
                 'name' => $product->getName(),
                 'quantity' => $cartProduct->getQuantity(),
+                'is_in_cart' => $cartProduct->getIsInCart(),
             ];
         }
     
@@ -193,20 +194,11 @@ class CartController extends AbstractController
             ], Response::HTTP_NOT_FOUND);
         }
     
-        $cart->removeItem($cartItem);
+        // Set isInCart to false instead of removing the cart item
+        $cartItem->setIsInCart(false);
     
-        $entityManager = $this->doctrine->getManager();
-        $entityManager->beginTransaction();
-        try {
-            $entityManager->remove($cartItem);
-            $entityManager->flush();
-            $entityManager->commit();
-        } catch (\Exception $e) {
-            $entityManager->rollback();
-            return new JsonResponse([
-                'message' => 'An error occurred while removing product from cart!',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        $entityManager->persist($cartItem);
+        $entityManager->flush();
     
         return new JsonResponse([
             'message' => 'Product removed from cart successfully',
@@ -241,13 +233,13 @@ class CartController extends AbstractController
         $cartProducts = $cart->getItems();
         if ($cartProducts) {
             foreach ($cartProducts as $cartProduct) {
-                $entityManager->remove($cartProduct);
+                // Set isInCart to false instead of removing the cart product
+                $cartProduct->setIsInCart(false);
+                $entityManager->persist($cartProduct);
+                $entityManager->getUnitOfWork()->propertyChanged($cartProduct, 'isInCart');
             }
             $entityManager->flush(); 
         }
-    
-        $entityManager->remove($cart);
-        $entityManager->flush();
     
         return new JsonResponse([
             'message' => 'Cart deleted successfully',

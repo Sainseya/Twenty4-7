@@ -22,7 +22,8 @@ class CartProduct
     #[ORM\Column]
     private ?int $quantity = null;
 
-    private $isInCart;
+    #[ORM\Column(type: "boolean", options: ["default" => true])]
+    private $isInCart = true;
 
     public function getIsInCart(): ?bool
     {
