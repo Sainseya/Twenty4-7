@@ -18,9 +18,6 @@ use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 
 
-// Remove the unnecessary opening curly brace '{'use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-
 class UserController extends AbstractController
 {
 
@@ -128,6 +125,59 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             return $this->json(['status' => 'User updated'], 200);
+        } catch (\Throwable $e) {
+            return $this->json(['error' => $e->getMessage()], 401);
+        }
+    }
+    #[Route('/api/user', name: 'user_delete', methods: ['DELETE'])]
+    public function delete(Request $request, JWTTokenManagerInterface $jwtManager, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
+    {
+
+        try {
+        
+            $authHeader = $request->headers->get('Authorization');
+            $jwtString = str_replace('Bearer ', '', $authHeader);
+            try {
+                $decodedJwtToken = $this->jwtEncoder->decode($jwtString);
+            } catch (\Exception $e) {
+                return $this->json(['message' => 'Invalid or missing token'], JsonResponse::HTTP_UNAUTHORIZED);
+            }
+            $username = $decodedJwtToken['username'];
+            $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+
+            if (!$user) {
+                return $this->json(['status' => 'User not found'], 404);
+            }
+            
+            #delete user from database
+            $entityManager->remove($user);
+            $entityManager->flush();
+            return $this->json(['status' => 'User deleted'], 200);
+        } catch (\Throwable $e) {
+            return $this->json(['error' => $e->getMessage()], 401);
+        }
+    }
+    #[Route('/api/user', name: 'user_get', methods: ['GET'])]
+    public function get(Request $request, JWTTokenManagerInterface $jwtManager, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
+    {
+
+        try {
+        
+            $authHeader = $request->headers->get('Authorization');
+            $jwtString = str_replace('Bearer ', '', $authHeader);
+            try {
+                $decodedJwtToken = $this->jwtEncoder->decode($jwtString);
+            } catch (\Exception $e) {
+                return $this->json(['message' => 'Invalid or missing token'], JsonResponse::HTTP_UNAUTHORIZED);
+            }
+            $username = $decodedJwtToken['username'];
+            $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+
+            if (!$user) {
+                return $this->json(['status' => 'User not found'], 404);
+            }
+            #return user from database
+            return $this->json(['status' => 'User found', 'user' => $user->toArray()], 200);
         } catch (\Throwable $e) {
             return $this->json(['error' => $e->getMessage()], 401);
         }

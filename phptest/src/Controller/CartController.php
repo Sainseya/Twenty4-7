@@ -31,7 +31,22 @@ class CartController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        // Vérifier si les clés existent dans les données JSON
+        $authHeader = $request->headers->get('Authorization');
+        $jwtString = str_replace('Bearer ', '', $authHeader);
+        try {
+            $decodedJwtToken = $this->jwtEncoder->decode($jwtString);
+        } catch (\Exception $e) {
+            return $this->json(['message' => 'Invalid or missing token'], JsonResponse::HTTP_UNAUTHORIZED);
+        }
+
+
+        $username = $decodedJwtToken['username'];
+        $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
+
+        if (!$user) {
+            return $this->json(['message' => 'User not found'], 404);
+        }
+        
         if (!isset($data['user_id'])) {
             return new JsonResponse([
                 'message' => 'Invalid request data!',
