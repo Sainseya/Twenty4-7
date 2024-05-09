@@ -1,0 +1,55 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { capitalizeWords } from "../../Utils/Tools";
+
+interface OrderCardProps {
+  numberOrder: number;
+  dateOfOrder: string;
+  status: string;
+}
+
+const OrderCard: React.FC<OrderCardProps> = ({
+  numberOrder,
+  dateOfOrder,
+  status,
+}) => {
+  const getStatusColorClass = (status: string): string => {
+    switch (status) {
+      case "pending":
+        return "bg-[#F2B828]"; //? Yellow
+      case "shipped":
+        return "bg-[#288AF2]"; //? Blue
+      case "delivered":
+        return "bg-[#37F228]"; //? Green
+      case "cancelled":
+        return "bg-[#F22828]"; //? Red
+      default:
+        return "bg-gray-500"; //? Gray
+    }
+  };
+
+  return (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      type="button"
+      className="flex flex-col h-24 w-full text-txtWhite bg-txtPlaceholder rounded-xl border-2 border-light_border dark:border-dark_border p-3"
+    >
+      <div className="font-semibold text-xl h-full">
+        Order n°{numberOrder + 1}
+      </div>
+      <div className="flex w-full justify-between">
+        <div>{dateOfOrder}</div>
+        <div className="font-semibold flex items-center gap-2">
+          <div
+            className={`size-[10px] rounded-full ${getStatusColorClass(
+              status
+            )}`}
+          ></div>
+          <div>{capitalizeWords(status)}</div>
+        </div>
+      </div>
+    </motion.button>
+  );
+};
+
+export default OrderCard;

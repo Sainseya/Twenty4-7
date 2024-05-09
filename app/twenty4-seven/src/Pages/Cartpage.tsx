@@ -3,6 +3,7 @@ import Topbar from "../Components/navigation/Topbar";
 import Footer from "../Components/navigation/Footer";
 import CartNavBar from "../Components/Cart/CartNavBar";
 import Cart from "../Components/Cart/Cart";
+import Order from "../Components/Order/Order";
 
 const Cartpage: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,11 +20,8 @@ const Cartpage: React.FC = () => {
         </div>
       )}
       {activeIndex === 1 && (
-        <div className="flex flex-col flex-grow w-full px-44">
-          {/* Order Component here */}
-          <div className="flex flex-1 w-full justify-center items-center font-semibold text-4xl text-txtBlack dark:text-txtWhite">
-            Order Comming Soon
-          </div>
+        <div className="flex h-full flex-grow px-44">
+          <Order />
         </div>
       )}
       <Footer />
