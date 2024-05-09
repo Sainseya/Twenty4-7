@@ -9,17 +9,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+
+
+// Remove the unnecessary opening curly brace '{'use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
-    private $tokenStorage;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    private $jwtEncoder;
+
+    public function __construct(JWTEncoderInterface $jwtEncoder)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->jwtEncoder = $jwtEncoder;
     }
 
     #[Route('/register', name: 'user_register', methods: ['POST'])]
@@ -76,43 +85,52 @@ class UserController extends AbstractController
     }
 
 
-    // #[Route('/api/user', name: 'user_update', methods: ['PUT'])]
-    // public function update(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, JWTTokenManagerInterface $JWTManager): JsonResponse
-    // {
-    //     $data = json_decode($request->getContent(), true);
+    #[Route('/api/user', name: 'user_update', methods: ['PUT'])]
+    public function update(Request $request, JWTTokenManagerInterface $jwtManager, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
+    {
 
-    //     if ($data === null) {
-    //         return $this->json(['message' => 'Invalid JSON'], 400);
-    //     }
+        try {
+            $data = json_decode($request->getContent(), true);
 
-    //     $decodedToken = $JWTManager->decode($this->tokenStorage->getToken());
-    //     if (isset($decodedToken['username'])) {
-    //         $userId = $decodedToken['id'];
-    //         $user = $entityManager->getRepository(User::class)->find($userId);
-    //         if (!$user) {
-    //             return $this->json(['message' => 'User not found'], 404);
-    //         }
+            if ($data === null) {
+                return $this->json(['message' => 'Invalid JSON'], 400);
+            }
+        
+            $authHeader = $request->headers->get('Authorization');
+            $jwtString = str_replace('Bearer ', '', $authHeader);
+            try {
+                $decodedJwtToken = $this->jwtEncoder->decode($jwtString);
+            } catch (\Exception $e) {
+                return $this->json(['message' => 'Invalid or missing token'], JsonResponse::HTTP_UNAUTHORIZED);
+            }
 
-    //         // Update user properties with provided data
-    //         $user->setFirstname($data['firstname'] ?? $user->getFirstname());
-    //         $user->setLastname($data['lastname'] ?? $user->getLastname());
-    //         $user->setRole($data['role'] ?? $user->getRole());
-    //         $user->setEmail($data['email'] ?? $user->getEmail());
-    //         $user->setWallet($data['wallet'] ?? $user->getWallet());
-    //         $user->setBio($data['bio'] ?? $user->getBio());
 
-    //         // If a new password is provided, hash and update the password
-    //         if (isset($data['password'])) {
-    //             $user->setPassword($passwordHasher->hashPassword($user, $data['password']));
-    //         }
+            $username = $decodedJwtToken['username'];
+            $user = $entityManager->getRepository(User::class)->findOneBy(['username' => $username]);
 
-    //         try {
-    //             $entityManager->flush();
-    //         } catch (\Exception $e) {
-    //             return new JsonResponse(['error' => 'User update failed: ' . $e->getMessage()], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-    //         }
+            if (!$user) {
+                return $this->json(['message' => 'User not found'], 404);
+            }
 
-    //         return new JsonResponse(['status' => 'User updated'], JsonResponse::HTTP_OK);
-    //     }
-    // }
-}
+            // Update user properties with provided data
+            $user->setFirstname($request->get('firstname') ?? $user->getFirstname());
+            $user->setLastname($request->get('lastname') ?? $user->getLastname());
+            $user->setRole($request->get('role') ?? $user->getRole());
+            $user->setEmail($request->get('email') ?? $user->getEmail());
+            $user->setWallet($request->get('wallet') ?? $user->getWallet());
+            $user->setBio($request->get('bio') ?? $user->getBio());
+
+            // If a new password is provided, hash and update the password
+            if ($request->get('password')) {
+                $user->setPassword($passwordHasher->hashPassword($user, $request->get('password')));
+            }
+
+            $entityManager->flush();
+
+            return $this->json(['status' => 'User updated'], 200);
+        } catch (\Throwable $e) {
+            return $this->json(['error' => $e->getMessage()], 401);
+        }
+    }
+    }
+    
