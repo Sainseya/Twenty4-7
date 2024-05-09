@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { capitalizeWords } from "../../Utils/Tools";
+import { capitalizeWords, getPastilColor } from "../../Utils/Tools";
 
 interface OrderCardProps {
   numberOrder: number;
@@ -13,20 +13,6 @@ const OrderCard: React.FC<OrderCardProps> = ({
   dateOfOrder,
   status,
 }) => {
-  const getStatusColorClass = (status: string): string => {
-    switch (status) {
-      case "pending":
-        return "bg-[#F2B828]"; //? Yellow
-      case "shipped":
-        return "bg-[#288AF2]"; //? Blue
-      case "delivered":
-        return "bg-[#37F228]"; //? Green
-      case "cancelled":
-        return "bg-[#F22828]"; //? Red
-      default:
-        return "bg-gray-500"; //? Gray
-    }
-  };
 
   return (
     <motion.button
@@ -41,9 +27,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
         <div>{dateOfOrder}</div>
         <div className="font-semibold flex items-center gap-2">
           <div
-            className={`size-[10px] rounded-full ${getStatusColorClass(
-              status
-            )}`}
+            className={`size-[10px] rounded-full ${getPastilColor(status)}`}
           ></div>
           <div>{capitalizeWords(status)}</div>
         </div>

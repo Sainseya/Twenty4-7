@@ -19,10 +19,10 @@ const CartSummary: React.FC<CartSummaryProps> = ({
 
   return (
     <div className="w-1/4">
-      <div className="bg-light_bg dark:bg-dark_bg2 border-2 border-light_border dark:border-dark_border rounded-lg shadow-md p-6 sticky top-36">
-        <h2 className="text-lg font-semibold mb-4 dark:text-txtWhite">
+      <div className="bg-light_bg dark:bg-dark_bg2 border-2 border-light_border dark:border-dark_border rounded-lg shadow-md p-6 sticky top-44">
+        <div className="text-lg font-semibold mb-4 dark:text-txtWhite">
           Summary
-        </h2>
+        </div>
         <div className="flex justify-between mb-2">
           <span className="dark:text-txtWhite">Subtotal</span>
           <span className="flex items-center gap-2 dark:text-txtWhite">
