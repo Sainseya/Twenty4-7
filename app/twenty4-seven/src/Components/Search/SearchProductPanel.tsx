@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const SearchProductPanel: React.FC = () => {
   const submitSimpleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,7 +26,8 @@ const SearchProductPanel: React.FC = () => {
             className="border-2 border-light_border dark:border-dark_txtZone bg-light_bg dark:bg-dark_txtZone rounded-lg outline-none placeholder:to-txtPlaceholder"
             placeholder="Dirt block"
           ></input>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
             type="submit"
             className="flex h-12 w-12 px-3 justify-center items-center rounded-lg border-2 border-light_border dark:border-dark_txtZone bg-light_bg2 dark:bg-dark_txtZone"
             onClick={submitSimpleSearch}
@@ -34,7 +36,7 @@ const SearchProductPanel: React.FC = () => {
               size={18}
               className="text-txtPlaceholder dark:text-txtWhite"
             />
-          </button>
+          </motion.button>
         </div>
       </form>
       <form action="" className="sticky top-64">
@@ -60,14 +62,15 @@ const SearchProductPanel: React.FC = () => {
             ></input>
           </div>
         </div>
-        <div className="mb-2 px-4">
-          <button
+        <div className="mt-8 px-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
             type="button"
             className="w-full p-3 bg-purpleButton text-txtWhite rounded-lg font-semibold"
             onClick={submitGlobalSearch}
           >
             Apply
-          </button>
+          </motion.button>
         </div>
       </form>
       <div className="flex-1 min-h-10"></div>
