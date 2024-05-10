@@ -28,6 +28,7 @@ const OrderCard: React.FC<OrderCardProps> = ({
         <div className="font-semibold flex items-center gap-2">
           <div
             className={`size-[10px] rounded-full ${getPastilColor(status)}`}
+            data-testid="status-badge"
           ></div>
           <div>{capitalizeWords(status)}</div>
         </div>

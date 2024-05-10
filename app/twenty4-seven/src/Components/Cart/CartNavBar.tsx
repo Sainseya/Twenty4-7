@@ -31,6 +31,7 @@ const CartNavBar: React.FC<CartNavBarProps> = ({ setActiveIndex, activeIndex }) 
       <div
         className={`bottom-0 h-1 absolute px-2 left-0 w-28 transition-transform duration-300 ease-in-out`}
         style={{ transform: `translateX(calc(${activeIndex} * 112px))` }}
+        data-testid="active-indicator"
       >
         <div className="w-full h-full rounded-t bg-greenButton"></div>
       </div>

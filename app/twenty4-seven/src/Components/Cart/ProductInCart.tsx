@@ -37,7 +37,7 @@ const ProductInCart: React.FC<ProductInCartProps> = ({
         <span className="flex justify-center items-center gap-2">
           {price}
           {isNft ? (
-            <SolanaLogo style={{ width: "18px", height: "18px" }} />
+            <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
           ) : (
             <span>$</span>
           )}

@@ -41,7 +41,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 <span>{subtotalPriceOther} $</span>
                 <span className="flex items-center gap-2">
                   {subtotalPriceNft}
-                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                 </span>
               </div>
             ) : (
@@ -49,7 +49,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 {allNft ? (
                   <span className="flex items-center gap-2">
                     {subtotalPriceNft}
-                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                   </span>
                 ) : (
                   <>{subtotalPriceOther} $</>
@@ -66,7 +66,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 <span>{taxeOther} $</span>
                 <span className="flex items-center gap-2">
                   {taxeNft}
-                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                 </span>
               </div>
             ) : (
@@ -74,7 +74,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 {allNft ? (
                   <span className="flex items-center gap-2">
                     {taxeNft}
-                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                   </span>
                 ) : (
                   <>{taxeOther} $</>
@@ -105,7 +105,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 <span>{totalPriceOther} $</span>
                 <span className="flex items-center gap-2">
                   {totalPriceNft}
-                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                 </span>
               </div>
             ) : (
@@ -113,7 +113,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({
                 {allNft ? (
                   <span className="flex items-center gap-2">
                     {totalPriceNft}
-                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} data-testid="solana-logo" />
                   </span>
                 ) : (
                   <>{totalPriceOther} $</>
