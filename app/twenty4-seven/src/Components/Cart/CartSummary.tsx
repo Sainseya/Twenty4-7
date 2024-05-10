@@ -3,19 +3,28 @@ import { ReactComponent as SolanaLogo } from "../../Assets/solanaLogoMark.svg";
 import { motion } from "framer-motion";
 
 interface CartSummaryProps {
-  subtotalPrice: number;
-  taxe?: number;
+  // cartProductData: CartProductData[];
+  subtotalPriceNft: number;
+  subtotalPriceOther: number;
+  taxeNft?: number;
+  taxeOther?: number;
   shippingPrice?: number;
   allNft?: boolean;
+  haveOneNft?: boolean;
 }
 
 const CartSummary: React.FC<CartSummaryProps> = ({
-  subtotalPrice,
-  taxe = 0,
-  shippingPrice = 0,
-  allNft: haveNft = false,
+  subtotalPriceNft,
+  subtotalPriceOther,
+  taxeNft = 0.1,
+  taxeOther = 0,
+  shippingPrice = 5,
+  allNft = false,
+  haveOneNft = false,
+  // cartProductData,
 }) => {
-  const totalPrice = (subtotalPrice + taxe + shippingPrice).toFixed(2);
+  const totalPriceNft = (subtotalPriceNft + taxeNft).toFixed(2);
+  const totalPriceOther = (subtotalPriceOther + taxeNft + shippingPrice).toFixed(2);
 
   return (
     <div className="w-1/4">
@@ -23,55 +32,93 @@ const CartSummary: React.FC<CartSummaryProps> = ({
         <div className="text-lg font-semibold mb-4 dark:text-txtWhite">
           Summary
         </div>
+        <div className="flex flex-col gap-2">
         <div className="flex justify-between mb-2">
           <span className="dark:text-txtWhite">Subtotal</span>
-          <span className="flex items-center gap-2 dark:text-txtWhite">
-            {haveNft ? (
-              <>
-                {subtotalPrice}
-                <SolanaLogo style={{ width: "18px", height: "18px" }} />
-              </>
+          <span className="dark:text-txtWhite">
+            {haveOneNft && !allNft ? (
+              <div className="flex flex-col gap-1 text-right">
+                <span>{subtotalPriceOther} $</span>
+                <span className="flex items-center gap-2">
+                  {subtotalPriceNft}
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                </span>
+              </div>
             ) : (
-              <>${subtotalPrice}</>
+              <>
+                {allNft ? (
+                  <span className="flex items-center gap-2">
+                    {subtotalPriceNft}
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  </span>
+                ) : (
+                  <>{subtotalPriceOther} $</>
+                )}
+              </>
             )}
           </span>
         </div>
         <div className="flex justify-between mb-2">
-          <span className="dark:text-txtWhite">Taxes</span>
-          <span className="flex items-center gap-2 dark:text-txtWhite">
-            {haveNft ? (
-              <>
-                {taxe}
-                <SolanaLogo style={{ width: "18px", height: "18px" }} />
-              </>
+          <span className="dark:text-txtWhite">Tax</span>
+          <span className="dark:text-txtWhite">
+            {haveOneNft && !allNft ? (
+              <div className="flex flex-col gap-1 text-right">
+                <span>{taxeOther} $</span>
+                <span className="flex items-center gap-2">
+                  {taxeNft}
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                </span>
+              </div>
             ) : (
-              <>${taxe}</>
+              <>
+                {allNft ? (
+                  <span className="flex items-center gap-2">
+                    {taxeNft}
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  </span>
+                ) : (
+                  <>{taxeOther} $</>
+                )}
+              </>
             )}
           </span>
         </div>
         <div className="flex justify-between mb-2">
-          {haveNft ? (
+          {allNft ? (
             <></>
           ) : (
             <>
               <span className="dark:text-txtWhite">Shipping</span>
               <span className="flex items-center gap-2 dark:text-txtWhite">
-                ${shippingPrice}
+                {shippingPrice} $
               </span>
             </>
           )}
         </div>
+        </div>
         <hr className="my-4" />
         <div className="flex justify-between mb-2">
           <span className="font-semibold dark:text-txtWhite">Total</span>
-          <span className="flex items-center gap-2 font-semibold dark:text-txtWhite">
-            {haveNft ? (
-              <>
-                {totalPrice}
-                <SolanaLogo style={{ width: "18px", height: "18px" }} />
-              </>
+          <span className="font-semibold dark:text-txtWhite">
+            {haveOneNft && !allNft ? (
+              <div className="flex flex-col gap-1 text-right">
+                <span>{totalPriceOther} $</span>
+                <span className="flex items-center gap-2">
+                  {totalPriceNft}
+                  <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                </span>
+              </div>
             ) : (
-              <>${totalPrice}</>
+              <>
+                {allNft ? (
+                  <span className="flex items-center gap-2">
+                    {totalPriceNft}
+                    <SolanaLogo style={{ width: "18px", height: "18px" }} />
+                  </span>
+                ) : (
+                  <>{totalPriceOther} $</>
+                )}
+              </>
             )}
           </span>
         </div>
