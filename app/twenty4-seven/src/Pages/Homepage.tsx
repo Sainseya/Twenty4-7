@@ -9,21 +9,22 @@ import useCategory from "../Utils/useCategory";
 import { capitalizeWords } from "../Utils/Tools";
 
 const Homepage: React.FC = () => {
-  const { categoryData, fetchData, getImageFromId } = useCategory();
-
+  const { categoryData, fetchData, getImageFromId, sortCategoriesById } = useCategory();
+  
   useEffect(() => {
     fetchData();
   }, []);
 
-  const categories = categoryData.map((category) => ({
+  const sortedCategories = sortCategoriesById(categoryData)
+
+  const categories = sortedCategories.map((category) => ({
     id: category.id,
     categoryName: category.type,
     description: category.bio,
     imageUrl: getImageFromId(category.id),
   }));
 
-  categories.sort((a, b) => a.id - b.id);
-  // console.log("Categories in homepage :", categories);
+  console.log("Categories  in homepage :", categories);
   
   return (
     <div className="min-h-screen bg-light_bg dark:bg-dark_bg">

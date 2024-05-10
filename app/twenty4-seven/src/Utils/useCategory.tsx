@@ -44,10 +44,27 @@ const useCategory = () => {
     }
   };
 
+  const sortCategoriesById = (categories: Category[]): Category[] => {
+    return categories.sort((a, b) => {
+      if (a.id === b.id) {
+        return 0;
+      }
+      // Placer "soon" à la fin
+      if (a.type === "soon") {
+        return 1;
+      }
+      if (b.type === "soon") {
+        return -1;
+      }
+      return a.id - b.id;
+    });
+  };
+
   return {
     categoryData,
     fetchData,
     getImageFromId,
+    sortCategoriesById,
   };
 };
 
