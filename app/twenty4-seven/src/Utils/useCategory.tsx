@@ -23,10 +23,10 @@ const useCategory = () => {
       const response = await axios.get(ENDPOINT);
 
       setCategoryData(response.data.catalogs);
-      // console.log("Response Axios :", categoryData);
     } catch (error) {
       console.error("Error fetching category data: ", error);
     }
+    // console.log("Response Axios :", categoryData);
   };
 
   const getImageFromId = (id: number): string => {
@@ -44,6 +44,15 @@ const useCategory = () => {
     }
   };
 
+  /**
+   * The `sortCategoriesById` function sorts an array of Category objects by their id values, with
+   * "soon" categories placed at the end.
+   * @param {Category[]} categories - An array of objects representing categories. Each category object
+   * has properties including an `id` (number) and a `type` (string).
+   * @returns The function `sortCategoriesById` is returning an array of `Category` objects sorted by
+   * their `id` property. If two categories have the same `id`, the function will then sort them based
+   * on their `type` property, with categories of type "soon" being placed at the end.
+   */
   const sortCategoriesById = (categories: Category[]): Category[] => {
     return categories.sort((a, b) => {
       if (a.id === b.id) {
