@@ -20,6 +20,7 @@ const Homepage: React.FC = () => {
     };
 
     fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sortedCategories = sortCategoriesById(categoryData);
