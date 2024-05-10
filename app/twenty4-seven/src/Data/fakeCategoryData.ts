@@ -25,3 +25,8 @@ export const fakeCategoriesData = [
     description: "Stay tuned! Exciting new releases coming soon, stay connected.",
   },
 ];
+
+export const fakeNftImage = NftImg;
+export const fakeBathwaterImage = Bathwaterimg;
+export const fakeCoursesImage = CoursesImg;
+export const fakeSonnImage = SoonImg;
