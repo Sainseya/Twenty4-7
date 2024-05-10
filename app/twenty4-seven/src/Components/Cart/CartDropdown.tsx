@@ -63,7 +63,12 @@ const CartDropdown: React.FC<CartDropdownProps> = ({
                   className="relative flex w-full h-16 items-center px-2"
                   data-testid="item"
                 >
-                  <div className="h-10 w-10 bg-slate-300 rounded-lg"></div>
+                  <img
+                    className="size-10 rounded-lg"
+                    //! Placeholder
+                    src="https://placehold.co/512?text=Item"
+                    alt="Product"
+                  />
                   <p className="flex flex-1 p-2 text-left text-txtBlack dark:text-txtWhite">
                     Name
                   </p>

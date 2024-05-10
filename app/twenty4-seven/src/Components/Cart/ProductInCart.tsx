@@ -23,7 +23,8 @@ const ProductInCart: React.FC<ProductInCartProps> = ({
         <div className="flex items-center">
           <img
             className="h-20 w-20 mr-4 rounded-lg"
-            src="https://via.placeholder.com/150"
+            //! Placeholder
+            src="https://placehold.co/512?text=Product"
             alt="Product"
           />
           <span className="font-semibold dark:text-txtWhite">

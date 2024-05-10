@@ -62,6 +62,6 @@ export const getTimelineColor = (status: string): string => {
     case "cancelled":
       return "bg-red-500"; //? Red
     default:
-      return "bg-gray-300"; //? Gray
+      return "bg-gray-400"; //? Gray
   }
 }
