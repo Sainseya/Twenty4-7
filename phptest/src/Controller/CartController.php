@@ -221,7 +221,7 @@ class CartController extends AbstractController
             ], Response::HTTP_NOT_FOUND);
         }
     
-        $cartRepository = $entityManager->getRepository(Cart::class);
+        $cartRepository = $this->doctrine->getRepository(Cart::class);
         $cart = $cartRepository->findOneBy(['user' => $user]);
     
         if (!$cart) {
@@ -231,18 +231,34 @@ class CartController extends AbstractController
         }
     
         $cartProducts = $cart->getItems();
+    
+        $cartDetails = [];
+    
+        $cartProducts = $this->doctrine->getRepository(CartProduct::class)->findBy(['cart' => $cart, 'isInCart' => true]);
+    
+        foreach ($cartProducts as $cartProduct) {
+        $cartDetails = [];
         if ($cartProducts) {
             foreach ($cartProducts as $cartProduct) {
                 // Set isInCart to false instead of removing the cart product
                 $cartProduct->setIsInCart(false);
                 $entityManager->persist($cartProduct);
-                $entityManager->getUnitOfWork()->propertyChanged($cartProduct, 'isInCart');
+    
+                // Add cart product details to the response
+                $cartDetails[] = [
+                    'product_id' => $cartProduct->getProduct()->getId(),
+                    'name' => $cartProduct->getProduct()->getName(),
+                    'quantity' => $cartProduct->getQuantity(),
+                    'is_in_cart' => $cartProduct->getIsInCart(),
+                ];
             }
             $entityManager->flush(); 
         }
     
         return new JsonResponse([
             'message' => 'Cart deleted successfully',
+            'cart_details' => $cartDetails,
         ], Response::HTTP_OK);
     }
+}
 }
