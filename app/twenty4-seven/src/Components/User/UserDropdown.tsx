@@ -59,7 +59,7 @@ const UserDropdown: React.FC<UserDropdownProps> = ({
             <button
               type="button"
               className="flex h-6 mb-1 w-full flex-row justify-center items-center gap-4"
-              onClick={() => navigateToLink("shoppingcart")}
+              onClick={() => navigateToLink("cart")}
             >
               <FaShoppingCart size={18} className="dark:text-txtWhite" />
               <div className="flex-1 text-right dark:text-txtWhite">Orders</div>

@@ -8,24 +8,26 @@ import Authentification from './Pages/Authentification';
 import Homepage from './Pages/Homepage';
 import NFTpage from './Pages/NFTpage';
 import Page404 from './Pages/Page404';
+import Cartpage from './Pages/Cartpage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ThemeProvider>
       <Router>
         <Routes>
           <Route path='/connexion' element={<Authentification />}></Route>
           <Route path='/' element={<Homepage />}></Route>
           <Route path='/nft' element={<NFTpage />}></Route>
+          <Route path='/cart' element={<Cartpage />}></Route>
           <Route path='/404' element={<Page404 />}></Route>
         </Routes>
       </Router>
     </ThemeProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

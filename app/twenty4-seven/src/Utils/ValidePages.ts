@@ -1,7 +1,7 @@
 /**
  * A string array containing all existing and valid pages, use "" for the root
  */
-const validPages: string[] = ["", "connexion", "nft"];
+const validPages: string[] = ["", "connexion", "nft", "cart"];
 /**
  * Returns true if the page name passed in parameter is valid
  * @param pageName 

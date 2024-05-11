@@ -36,21 +36,23 @@ const NftCard: React.FC<NftCardProps> = ({ price, idCard }) => {
         </div>
         <div className="flex gap-4 pb-3">
           <div className="flex-1"></div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
             type="button"
             className="h-8 px-4 border-2 border-purpleButton rounded-lg text-sm font-medium text-txtPurple"
             onClick={() => showDetails(idCard)}
           >
             Details
-          </button>
-          <button
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
             type="button"
             className="flex items-center justify-center h-8 w-8 bg-purpleButton rounded-lg p-1"
             onClick={addNftToCart}
             data-testid="add to cart"
           >
             <FaCartShopping size={20} className="text-txtWhite" />
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>

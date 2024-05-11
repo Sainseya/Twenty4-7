@@ -9,8 +9,13 @@ interface CategoriesProps {
   imgPath?: string | null;
 }
 
-const Category: React.FC<CategoriesProps> = ({ categoryName, imgPath = null }) => {
-  const [buttonStyle, setButtonStyle] = useState({ backgroundColor: "#F9FAFB" });
+const Category: React.FC<CategoriesProps> = ({
+  categoryName,
+  imgPath = null,
+}) => {
+  const [buttonStyle, setButtonStyle] = useState({
+    backgroundColor: "#F9FAFB",
+  });
 
   let navigate = useNavigate();
 
@@ -32,10 +37,7 @@ const Category: React.FC<CategoriesProps> = ({ categoryName, imgPath = null }) =
         setButtonStyle({ backgroundColor: colorHex });
       })
       .catch((error) => {
-        console.error(
-          "Error when extracting the main color :",
-          error
-        );
+        console.error("Error when extracting the main color :", error);
       });
   }, [imgPath]);
 
