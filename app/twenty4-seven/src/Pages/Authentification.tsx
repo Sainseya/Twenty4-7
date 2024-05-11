@@ -4,6 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 import TextInput from "../Components/Input/TextInput";
 import PasswordInput from "../Components/Input/PasswordInput";
+import "../CSS/BlobAuthStyle.css"
 //Hook
 import useAuth from "../Utils/useAuth";
 
@@ -28,7 +29,6 @@ const Authentification: React.FC = () => {
                 You can create a free Twenty4/7 in 2 minutes
               </p>
             </div>
-
             <div className="relative max-w-md mx-auto mt-8 md:mt-16">
               <div className="overflow-hidden bg-white rounded-md shadow-md">
                 <div className="px-4 py-6 sm:px-8 sm:py-7">
@@ -88,7 +88,6 @@ const Authentification: React.FC = () => {
                           </span>
                         </label>
                       </div>
-
                       <div>
                         <button
                           type="submit"
@@ -132,7 +131,6 @@ const Authentification: React.FC = () => {
                 Login to your account
               </p>
             </div>
-
             <div className="relative max-w-md mx-auto mt-8 md:mt-16">
               <div className="overflow-hidden bg-white rounded-md shadow-md">
                 <div className="px-4 py-6 sm:px-8 sm:py-7">
