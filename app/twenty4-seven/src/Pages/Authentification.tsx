@@ -5,20 +5,15 @@ import { FaRegUser } from "react-icons/fa";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 import TextInput from "../Components/Input/TextInput";
 import PasswordInput from "../Components/Input/PasswordInput";
+import TransitionPanel from "../Components/TransitionPanel";
 import "../CSS/Blob404Style.css";
-import { ReactComponent as LogoDark } from "../Assets/LogoWebDark.svg";
-import { ReactComponent as LogoLight } from "../Assets/LogoWebLight.svg";
 //Hook
 import useAuth from "../Utils/useAuth";
-import { useTheme } from "../Utils/ThemeContext";
 
 const Authentification: React.FC = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const { formData, setFormData, handleSubmitSignUp, handleSubmitLogin } =
     useAuth();
-  const { theme } = useTheme();
-  const LogoComponent = theme === 'dark' ? LogoDark : LogoLight;
-
   const togglePanel = () => {
     setIsPanelOpen(!isPanelOpen);
   };
@@ -215,25 +210,7 @@ const Authentification: React.FC = () => {
             </div>
           </section>
         </div>
-        <div
-          id="panelSlide"
-          className={`absolute h-full w-1/2 z-10 dark:bg-dark_border ${
-            isPanelOpen
-              ? "translate-x-0 rounded-r-full"
-              : "translate-x-[100%] rounded-l-full"
-          } transition-all duration-500 ease-in-out`}
-        >
-          <div
-            className={`size-full bg-transparent border-[24px] border-dark_border  ${
-              isPanelOpen ? "rounded-r-full" : "rounded-l-full"
-            } transition-all duration-500 ease-in-out 
-            flex flex-col items-center justify-center gap-4`}
-          >
-            <div className="dark:text-txtWhite font-semibold text-4xl">Twenty4/7</div>
-            <LogoComponent style={{ width: "124px", height: "124px" }} />
-            <div className="mt-8 dark:text-txtWhite text-2xl">The E-commerce site for influencers</div>
-          </div>
-        </div>
+        <TransitionPanel isPanelOpen={isPanelOpen} />
       </div>
     </div>
   );
