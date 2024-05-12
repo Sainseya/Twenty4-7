@@ -29,7 +29,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
       <div className="flex items-center justify-between">
         <label
           htmlFor="passwordInput"
-          className="text-base font-medium text-gray-900"
+          className="text-base font-medium dark:text-txtWhite"
         >
           {label}
         </label>
@@ -37,13 +37,13 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           <button
             type="button"
             title="Forgot password?"
-            className="text-sm font-medium text-orange-500 transition-all duration-200 hover:text-orange-600 focus:text-orange-600 hover:underline"
+            className="text-sm font-medium text-green-400 dark:text-txtGreen hover:text-green-600 dark:hover:text-green-500 hover:underline"
           >
             Forgot password ?
           </button>
         )}
       </div>
-      <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+      <div className="mt-2.5 relative text-txtPlaceholder">
         {icon && (
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             {icon}
@@ -54,7 +54,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           type={showPassword ? "text" : "password"}
           id="passwordInput"
           placeholder={placeholder}
-          className="block w-full py-4 pl-10 pr-14 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+          className="block w-full py-4 pl-10 pr-14 dark:text-txtWhite placeholder-txtPlaceholder bg-light_bg border dark:bg-dark_txtZone border-light_border dark:border-dark_border rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
           required
           value={value}
           onChange={onChange}

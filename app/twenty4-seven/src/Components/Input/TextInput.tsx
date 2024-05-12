@@ -16,7 +16,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon, i
         <label htmlFor="" className="text-base font-medium dark:text-txtWhite">
           {label}
         </label>
-        <div className="mt-2.5 relative text-gray-400">
+        <div className="mt-2.5 relative text-txtPlaceholder">
           {icon && (
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               {icon}

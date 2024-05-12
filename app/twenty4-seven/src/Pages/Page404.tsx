@@ -1,6 +1,6 @@
-import "../CSS/Blob404Style.css";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import "../CSS/Blob404Style.css"
 
 const Page404 = () => {
   let navigate = useNavigate();
@@ -22,7 +22,7 @@ const Page404 = () => {
         <div className="shape-blob six"></div>
       </div>
 
-      <div className="z-10 w-9/12 m-auto py-16 min-h-screen flex items-center justify-center">
+      <div className=" z-10 w-9/12 m-auto py-16 min-h-screen flex items-center justify-center">
         <div className="bg-light_bg dark:bg-dark_txtZone shadow-md overflow-hidden sm:rounded-lg pb-8">
           <div className="border-t border-light_border dark:border-dark_border rounded-t-lg text-center pt-8">
             <h1 className="text-8xl font-bold text-dark_txtBadge">404</h1>
