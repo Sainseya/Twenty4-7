@@ -42,4 +42,44 @@ class PaymentController extends AbstractController
         // Redirection vers la page de paiement Stripe
         // return $this->redirect($session->url, 303);
     }
+
+    public function apiCharge(Request $request, OrderRepository $orderRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $order = $orderRepository->find($data['orderId']);
+        $customerId = $data['customerId'] ?? null;
+
+        if (!$order) {
+            return new JsonResponse(['error' => 'Order not found'], 404);
+        }
+
+        $totalAmount = $order->getTotalPrice();
+
+        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
+
+        $chargeParams = [
+            'amount' => $totalAmount * 100,
+            'currency' => 'eur',
+            'description' => 'Paiement de commande',
+        ];
+
+        if ($customerId !== null) {
+            $chargeParams['customer'] = $customerId;
+        }
+
+        try {
+            $charge = Charge::create($chargeParams);
+
+            // If the charge is successful, update the payment status of the order
+            if ($charge) {
+                $order->setPaymentStatus('Done');
+                $entityManager->persist($order);
+                $entityManager->flush();
+            }
+
+            return new JsonResponse(['success' => 'Paiement effectué avec succès', 'charge' => $charge]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], 400);
+        }
+    }
 }
