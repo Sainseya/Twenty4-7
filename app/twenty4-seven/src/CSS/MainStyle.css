@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body * {
+  @apply transition-colors ease-linear duration-300;
+}
+
+body {
+  background-color: #fff;
+}
+
+html.dark body {
+  background-color: #1a1c1f;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Barre de défilement verticale */
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 8px;
+}
+
+/* La partie de la barre de défilement (le "thumb") */
+::-webkit-scrollbar-thumb {
+  background-color: #d0d2d7;
+  border-radius: 4px;
+}
+
+/* Au survol de la barre de défilement (le "thumb") */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bdbfc4;
+}
+
+/* La piste (le fond de la barre de défilement) */
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  /* border-radius: 8px; */
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: #363c44;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #2b2f35;
+}
+html.dark ::-webkit-scrollbar-track {
+  background-color: #222528;
+}

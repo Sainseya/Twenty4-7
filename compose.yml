@@ -1,31 +1,4 @@
 services:
-  php:
-    tty: true
-    container_name: php
-    build: .
-    ports:
-      - '9000:9000'
-    volumes:
-      - ./app:/var/www/symfony_docker
-    networks:
-      - app-network
-    depends_on:
-      - database
-
-  webserver:
-    tty: true
-    image: nginx:latest
-    container_name: webserver
-    ports:
-      - "8080:80"
-    volumes:
-      - ./app:/var/www/symfony_docker
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - php
-      - database
-    networks:
-      - app-network
 
   database:
     image: postgres:latest
@@ -35,15 +8,50 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: twenty4-seven-db
+      POSTGRES_DB: postgres
     volumes:
-      - postgresql_data:/var/lib/postgresql/data
+      - postgresql_twenty4-seven:/var/lib/postgresql/data
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.20.0.10
+    restart: unless-stopped
+
+  php:
+    container_name: php
+    build: .
+    ports:
+    - "8000:8000"
+    volumes:
+      - ./:/var/www
+    networks:
+      app-network:
+        ipv4_address: 172.20.0.12
+    depends_on:
+      - database
+    restart: unless-stopped
+
+  webserver:
+    image: httpd:latest
+    container_name: webserver
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - php
+    networks:
+      app-network:
+        ipv4_address: 172.20.0.14
+    restart: unless-stopped
 
 volumes:
-  postgresql_data:
+  postgresql_twenty4-seven:
 
 networks:
   app-network:
+    name: twenty4-seven
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway:  172.20.0.1
