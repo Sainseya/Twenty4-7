@@ -50,15 +50,14 @@ class Cart
         return $this->items;
     }
 
-    public function getItem(int $productId): ?CartProduct
+    public function getItem($productId)
     {
-        if ($this->items !== null) {
-            foreach ($this->items as $item) {
-                if ($item->getProduct()->getId() === $productId) {
-                    return $item;
-                }
+        foreach ($this->items as $cartProduct) {
+            if ($cartProduct->getProduct()->getId() === $productId) {
+                return $cartProduct;
             }
         }
+    
         return null;
     }
 

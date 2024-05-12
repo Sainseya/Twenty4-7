@@ -54,6 +54,7 @@ class CartController extends AbstractController
     
         $productRepository = $this->doctrine->getRepository(Product::class);
         $product = $productRepository->find($productId);
+
     
         if (!$product) {
             return new JsonResponse([
@@ -73,19 +74,12 @@ class CartController extends AbstractController
         }
     
         // Check if the product is already in the cart
-        $cartProduct = $cart->getItem($productId);
-    
-        if ($cartProduct) {
-            $cartProduct->setQuantity($cartProduct->getQuantity() + $data['quantity']);
-            $cartProduct->setIsInCart(true); // Set isInCart to true
-        } else {
             $cartProduct = new CartProduct();
             $cartProduct->setProduct($product);
             $cartProduct->setQuantity($data['quantity']);
             $cartProduct->setIsInCart(true); // Set isInCart to true
 
             $cart->setItem($cartProduct);
-        }
     
         // Use a transaction to ensure data integrity
         $this->entityManager->beginTransaction();
