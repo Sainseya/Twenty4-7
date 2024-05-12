@@ -139,6 +139,17 @@ Before getting started, ensure you have the following installed :
     php bin/console doctrine:migrations:migrate
     ```
 
+    Generate JWT keys:
+    ```sh
+    mkdir -p config/jwt
+    ```
+    ```sh
+    openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
+    ```
+    ```sh
+    openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
+    ```
+
     Start the server with Symfony :
     ```sh
     symfony server:start
