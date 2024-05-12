@@ -26,7 +26,7 @@ const TextInput: React.FC<TextInputProps> = ({ label, type, placeholder, icon, i
           <input
             type={type}
             placeholder={placeholder}
-            className="block w-full py-4 pl-10 pr-4 dark:text-txtWhite placeholder-txtPlaceholder bg-light_bg border dark:bg-dark_txtZone border-light_border dark:border-dark_border rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+            className="block w-full py-4 pl-10 pr-4 text-txtBlack dark:text-txtWhite placeholder-txtPlaceholder bg-light_bg border dark:bg-dark_txtZone border-light_border dark:border-dark_border rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
             required={isRequired}
             value={value}
             onChange={onChange}

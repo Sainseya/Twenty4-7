@@ -24,7 +24,7 @@ const TransitionPanel: React.FC<TransitionPanelProps> = ({ isPanelOpen }) => {
       <div className="dark:text-txtWhite font-semibold text-4xl">Twenty4/7</div>
       <LogoComponent style={{ width: "124px", height: "124px" }} />
       <div className="mt-8 dark:text-txtWhite text-2xl">
-        The E-commerce site for influencers
+        The E-commerce website for influencers
       </div>
     </div>
   );

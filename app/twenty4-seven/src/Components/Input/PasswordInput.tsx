@@ -52,9 +52,8 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
 
         <input
           type={showPassword ? "text" : "password"}
-          id="passwordInput"
           placeholder={placeholder}
-          className="block w-full py-4 pl-10 pr-14 dark:text-txtWhite placeholder-txtPlaceholder bg-light_bg border dark:bg-dark_txtZone border-light_border dark:border-dark_border rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
+          className="block w-full py-4 pl-10 pr-14 text-txtBlack dark:text-txtWhite placeholder-txtPlaceholder bg-light_bg border dark:bg-dark_txtZone border-light_border dark:border-dark_border rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
           required
           value={value}
           onChange={onChange}
