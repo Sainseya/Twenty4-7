@@ -49,17 +49,23 @@ class Cart
     {
         return $this->items;
     }
-
     public function getItem($productId)
-    {
-        foreach ($this->items as $cartProduct) {
-            if ($cartProduct->getProduct()->getId() === $productId) {
-                return $cartProduct;
+{
+    try {
+        if ($this->items !== null) {
+            foreach ($this->items as $cartProduct) {
+                if ($cartProduct->getProduct()->getId() === $productId) {
+                    return $cartProduct;
+                }
             }
         }
-    
+    } catch (\Exception $e) {
         return null;
     }
+
+    return null;
+}
+
 
     public function removeItem(CartProduct $itemToRemove): void
     {

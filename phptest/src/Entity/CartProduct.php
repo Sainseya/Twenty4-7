@@ -20,7 +20,7 @@ class CartProduct
     private $product;
 
     #[ORM\Column]
-    private ?int $quantity = null;
+    private ?int $quantity = 1;
 
     #[ORM\Column(type: "boolean", options: ["default" => true])]
     private $isInCart = true;
