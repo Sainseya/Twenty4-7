@@ -10,6 +10,16 @@ jest.mock("react-router", () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
+let scrollToMock: jest.SpyInstance;
+
+beforeEach(() => {
+  scrollToMock = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  scrollToMock.mockRestore();
+});
+
 describe("Footer", () => {
   test("renders product links correctly", () => {
     render(
