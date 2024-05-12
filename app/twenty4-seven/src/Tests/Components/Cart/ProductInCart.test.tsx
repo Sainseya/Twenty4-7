@@ -3,7 +3,13 @@ import ProductInCart from "../../../Components/Cart/ProductInCart";
 
 describe("ProductInCart component", () => {
   test("renders product details correctly", () => {
-    render(<ProductInCart productName="Test Product" price={10} />);
+    render(
+      <table>
+        <tbody>
+          <ProductInCart productName="Test Product" price={10} />
+        </tbody>
+      </table>
+    );
 
     const productNameElement = screen.getByText("Test Product");
     const quantityElement = screen.getByText("1");
@@ -16,7 +22,11 @@ describe("ProductInCart component", () => {
 
   test("renders quantity correctly when quantity is not 1", () => {
     render(
-      <ProductInCart productName="Test Product" quantity={2} price={10} />
+      <table>
+        <tbody>
+          <ProductInCart productName="Test Product" quantity={2} price={10} />
+        </tbody>
+      </table>
     );
 
     const quantityElement = screen.getByText("2");
@@ -24,7 +34,13 @@ describe("ProductInCart component", () => {
   });
 
   test("renders Solana logo when product is an NFT", () => {
-    render(<ProductInCart productName="Test Product" isNft price={10} />);
+    render(
+      <table>
+        <tbody>
+          <ProductInCart productName="Test Product" isNft price={10} />
+        </tbody>
+      </table>
+    );
     const solanaLogo = screen.getByTestId("solana-logo");
     expect(solanaLogo).toBeInTheDocument();
   });

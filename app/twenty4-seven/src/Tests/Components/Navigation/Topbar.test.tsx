@@ -10,6 +10,17 @@ jest.mock('react-router', () => ({
   useNavigate: () => mockedUsedNavigate,
 }));
 
+let scrollToMock: jest.SpyInstance;
+beforeEach(() => {
+  // Mock window.scrollTo
+  scrollToMock = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  // Restore original window.scrollTo
+  scrollToMock.mockRestore();
+});
+
 describe("Topbar component", () => {
   test('contains search input with placeholder "Search..."', () => {
     render(
