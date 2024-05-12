@@ -19,7 +19,7 @@ const NftCard: React.FC<NftCardProps> = ({ price, idCard }) => {
   };
 
   return (
-    <div className="flex flex-col h-80 w-64 items-center bg-light_bg dark:bg-dark_bg2 rounded-xl border-2 border-light_border dark:border-dark_border">
+    <div className="flex flex-col h-80 w-64 items-center bg-light_card dark:bg-dark_bg2 rounded-xl border-2 border-light_border dark:border-dark_border">
       <div className="h-56 w-56 mt-4 bg-light_border dark:bg-dark_border rounded-xl ">
         <motion.img
           whileHover={{ scale: 1.05 }}
