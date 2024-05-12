@@ -8,7 +8,7 @@ const useAuth = () => {
     email: "",
     password: "",
   });
-  const ENDPOINT = "http://localhost:8000";
+  const ENDPOINT = "http://localhost:8000/api";
   const navigate = useNavigate();
 
   const handleCommonSubmit = async (url: string, data: any) => {
