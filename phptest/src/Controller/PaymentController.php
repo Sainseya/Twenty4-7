@@ -26,7 +26,7 @@ class PaymentController extends AbstractController
 
         // Assurez-vous que $order existe avant de continuer avec le paiement Stripe
 
-        // \Stripe\Stripe::setApiKey('REDACTED_STRIPE_KEY');
+        // \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
         // $session = \Stripe\Checkout\Session::create([
         //     'payment_method_types' => ['card'],

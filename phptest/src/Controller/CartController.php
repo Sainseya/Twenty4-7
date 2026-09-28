@@ -261,7 +261,7 @@ class CartController extends AbstractController
                 $entityManager->remove($cartProduct);
             }
 
-            \Stripe\Stripe::setApiKey("REDACTED_STRIPE_KEY");
+            \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
             $product = \Stripe\Product::create([
                 'name' => 'Order Payment',
                 'description' => 'Payment for order ' . $order->getId(),
